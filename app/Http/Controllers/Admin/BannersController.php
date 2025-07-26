@@ -24,8 +24,6 @@ class BannersController extends Controller
     {
         $data = $this->validate($request, [
             'image' => 'required|mimes:jpg,jpeg,png,webp',
-           
-            'link' => 'nullable',
         ]);
 
         if ($request->hasFile('image')) {
@@ -50,7 +48,6 @@ class BannersController extends Controller
     {
         $data = $this->validate($request, [
             'image' => 'mimes:jpg,jpeg,png,webp',
-            'link' => 'nullable',
         ]);
 
         if ($request->hasFile('image')) {

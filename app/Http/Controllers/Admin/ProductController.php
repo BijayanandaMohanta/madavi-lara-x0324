@@ -28,7 +28,7 @@ class ProductController extends Controller
 {
     // Start with the query to select products
     $products = Product::select([
-        'id','sl_no', 'name', 'price', 'mrp', 'stock', 'slug', 'mop', 'status', 'category_id', 'sub_category_id', 'child_category_id'
+        'id','sl_no', 'name', 'price', 'mrp', 'stock', 'slug', 'status', 'category_id'
     ]);
 
     // Apply the search filter if the 'name' query parameter exists
@@ -73,7 +73,7 @@ class ProductController extends Controller
       'brand' => 'nullable',
       'gst' => 'nullable',
       'mrp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
-      'mop' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+      'mop' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/',
       'price' => [
         'required',
         'regex:/^([0-9\s\-\+\(\)]*\.)?([0-9\s\-\+\(\)]*)$/',
@@ -96,7 +96,7 @@ class ProductController extends Controller
       'warranty' => 'nullable',
       'highlights' => 'nullable',
       'status' => 'required',
-      'out_of_stock' => 'required'
+      'out_of_stock' => 'nullable'
     ]);
 
 
@@ -170,7 +170,7 @@ class ProductController extends Controller
       'brand' => 'nullable',
       'gst' => 'nullable',
       'mrp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
-      'mop' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+      'mop' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/',
       'price' => [
         'required',
         'regex:/^([0-9\s\-\+\(\)]*\.)?([0-9\s\-\+\(\)]*)$/',
@@ -298,7 +298,7 @@ class ProductController extends Controller
       'brand' => 'nullable',
       'gst' => 'nullable',
       'mrp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
-      'mop' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+      'mop' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/',
       'price' => [
         'required',
         'regex:/^([0-9\s\-\+\(\)]*\.)?([0-9\s\-\+\(\)]*)$/',
@@ -400,20 +400,8 @@ class ProductController extends Controller
   public function destroy($id)
   {
     $product = Product::find($id);
-
-    // Delete the associated image file if it exists
-    if ($product->size_chart_image) {
-      $existingImage = $product->size_chart_image;
-      $filePath = public_path('uploads/products/' . $existingImage);
-
-      if (file_exists($filePath)) {
-        unlink($filePath);
-      }
-    }
-    DB::table('carts')->where('product_id', $id)->where('status', 'Pending')->delete();
-
+    Cart::where('product_id', $id)->where('status', 'Pending')->delete();
     $product->delete();
-
     return redirect()->route('product.index')->with('success', 'Product deleted successfully.');
   }
   public function fetchccategory(Request $request)
@@ -439,41 +427,7 @@ class ProductController extends Controller
 
     return response()->json(['success' => true]);
   }
-  public function product_price_update(Request $request)
-  {
-    $product = Product::find($request->product_id);
-    Cart::where('product_id', $request->product_id)
-    ->where('status', 'Pending')
-    ->update([
-        'price' => $request->content,
-        'sub_total' => DB::raw('quantity * '.$request->content),
-    ]);
 
-    if ($product && is_numeric($request->content)) {
-      $product->price = $request->content;
-      $product->save();
-      return response()->json(['success' => true]);
-    } else {
-      return response()->json(['success' => false, 'message' => 'Invalid product or price']);
-    }
-  }
-  public function product_mop_update(Request $request)
-  {
-    $product = Product::find($request->product_id);
-
-    if (!$product) {
-      return response()->json(['success' => false, 'message' => 'Product not found']);
-    }
-
-    if (!is_numeric($request->content)) {
-      return response()->json(['success' => false, 'message' => 'Invalid MOP value']);
-    }
-
-    $product->mop = $request->content;
-    $product->save();
-
-    return response()->json(['success' => true]);
-  }
   public function product_export(Request $request)
   {
     return Excel::download(new ProductExportBasic, 'products_basic.xlsx');

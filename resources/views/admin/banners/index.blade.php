@@ -51,7 +51,6 @@
                                         <th>S.No</th>
                                        
                                         <th>Image</th>
-                                        <th style="width: 100px;">Link</th>
                                         <th>Modified At</th>
                                         <th>Action</th>
                                     </tr>
@@ -70,7 +69,6 @@
                                                 <span class="badge badge-warning">No Banner Image</span>
                                             @endif
                                             </td>
-                                            <td style="width: 100px;">{{ $data->link }}</td>
                                             <td>{{ \Carbon\Carbon::parse($data->updated_at)->format('d M Y h:i A') }}
                                             </td>
                                             

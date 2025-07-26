@@ -39,14 +39,7 @@
                                             Add Product
                                         </button>
                                     </a>
-                                    <button type="button" class="btn btn-primary btn-sm float-right ml-2"
-                                        data-toggle="modal" data-target="#exampleModalImport">
-                                        Import
-                                    </button>
-                                    <a href="{{ route('product_export') }}"
-                                        class="btn btn-success btn-sm float-right ml-2">Export Products Price&Stock</a>
-                                    <a href="{{ route('product_export_all') }}"
-                                        class="btn btn-success btn-sm float-right ml-2">Export All Data</a>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -76,12 +69,10 @@
                                         <th>S.No</th>
                                         <th>Category</th>
                                         <th>Name</th>
-                                        <th>Status</th>
-                                        <th width='60'>Price</th>
                                         <th>Stock</th>
                                         {{-- <th>Modified At</th> --}}
                                         <th>Manage Image</th>
-                                        <th>Manage Stock</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -93,59 +84,10 @@
 
                                             <td>
                                                 <span class="badge badge-primary">{{ $data->category->category }}</span>
-                                                <br>
-                                                <span
-                                                    class="badge badge-dark">{{ $data->subcategory->category ?? '' }}</span>
-                                                <br>
-                                                <span
-                                                    class="badge badge-secondary">{{ $data->childcategory->category ?? '' }}</span>
                                             </td>
                                             <td>{{ $data->name }}</td>
-                                            <td>
-                                                @if ($data->status == '1')
-                                                    <span class="badge badge-success">{{ 'Active' }}</span>
-                                                @endif
-                                                @if ($data->status == '0')
-                                                    <span class="badge badge-danger">{{ 'InActive' }}</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                Price : <span class="price" data-old-price="{{ $data->price }}"
-                                                    data-product-id="{{ $data->id }}"
-                                                    contenteditable="true">{{ $data->price }}</span>
-                                                {{-- <br> --}}
-                                                MOP : <span class="mop" data-old-mop="{{ $data->mop }}"
-                                                    data-product-id="{{ $data->id }}"
-                                                    contenteditable="true">{{ $data->mop }}</span>
-                                            </td>
-
-                                            {{-- Style for editable --}}
-                                            <style>
-                                                .price,
-                                                .mop {
-                                                    padding: 3px 7px;
-                                                    border: 1px dashed #007bff;
-                                                    border-radius: 4px;
-                                                    background-color: #f8f9fa;
-                                                    color: #333;
-                                                    cursor: pointer;
-                                                    transition: background-color 0.3s, border-color 0.3s;
-                                                    display: block;
-                                                }
-
-                                                .price:hover,
-                                                .mop:hover {
-                                                    background-color: #e9ecef;
-                                                    border-color: #0056b3;
-                                                }
-
-                                                .price:focus,
-                                                .mop:focus {
-                                                    outline: none;
-                                                    border-color: #0056b3;
-                                                    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
-                                                }
-                                            </style>
+                                           
+                                            
 
 
 
@@ -156,25 +98,19 @@
                                             </td> --}}
                                             <td>
                                                 <a href="{{ route('product_image.edit', [$data->id]) }}"
-                                                    class="btn btn-info waves-effect waves-light btn-xs"
-                                                    style="display: flex;align-items: center;gap: 2px;">
-                                                    Image <i class="fas fa-plus-circle"></i></a>
+                                                    class="btn btn-info waves-effect waves-light btn-xs">
+                                                    Upload Image 
+                                                </a>
 
                                             </td>
-                                            <td>
-                                                {{-- <a href="{{ route('product_stock.edit', [$data->id]) }}"
-                                                    class="btn btn-info waves-effect waves-light btn-xs"
-                                                    style="display: flex;align-items: center;gap: 2px;">
-                                                    Stock <i class="fas fa-plus-circle"></i></a> --}}
-
-                                                <button type="button"
-                                                    class="btn btn-sm btn-primary open-stock-update-modal"
-                                                    data-id="{{ $data->id }}" data-name="{{ $data->name }}">
-                                                    Stock Update
-                                                </button>
-
-
-
+                                           
+                                             <td>
+                                                @if ($data->status == '1')
+                                                    <span class="badge badge-success">{{ 'Active' }}</span>
+                                                @endif
+                                                @if ($data->status == '0')
+                                                    <span class="badge badge-danger">{{ 'InActive' }}</span>
+                                                @endif
                                             </td>
                                             <td class="d-flex" style="gap: 3px;">
                                                 <a href="{{ route('product.edit', [$data->id]) }}"
@@ -268,89 +204,6 @@
     }
 </script>
 
-<script>
-    $(document).ready(function() {
-        function priceUpdate(element) {
-            var content = $(element).html();
-            var old_price = $(element).data('oldPrice');
-            var product_id = $(element).data('productId');
-            $.ajax({
-                url: "{{ route('product_price_update') }}",
-                type: 'POST',
-                data: {
-                    content: content,
-                    old_price: old_price,
-                    product_id: product_id,
-                    _token: '{{ csrf_token() }}',
-                },
-                datatype: 'json',
-                success: function(response) {
-                    //Success logic if needed I will add it later
-                    showNotification('Price updated successfully!', 'success');
-                },
-                error: function(xhr, status, error) {
-                    // console.error('Error saving content:', error);
-                    showNotification('Error updating price. Please try again.', 'danger');
-                }
-            });
-        }
-
-        // Handle blur event for .price elements
-        $(document).on('blur', '.price', function() {
-            priceUpdate(this); // Call the priceUpdate function when the element loses focus
-        });
-
-        // Handle keydown event for Enter key in .price elements
-        $(document).on('keydown', '.price', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Prevent the default action of creating a new line
-                priceUpdate(this); // Call the priceUpdate function
-                $(this).blur(); // Optionally blur the input field
-            }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        function mopUpdate(element) {
-            var content = $(element).html();
-            var old_mop = $(element).data('oldMop');
-            var product_id = $(element).data('productId');
-            $.ajax({
-                url: "{{ route('product_mop_update') }}",
-                type: 'POST',
-                data: {
-                    content: content,
-                    old_mop: old_mop,
-                    product_id: product_id,
-                    _token: '{{ csrf_token() }}',
-                },
-                datatype: 'json',
-                success: function(response) {
-                    showNotification('MOP updated successfully!', 'success');
-                },
-                error: function(xhr, status, error) {
-                    // console.error('Error saving content:', error);
-                    showNotification('Error updating MOP. Please try again.', 'danger');
-                }
-            });
-        }
-
-        $(document).on('keydown', '.mop', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Prevent new line
-                mopUpdate(this); // Call your update function
-                $(this).blur(); // Optionally blur the input field
-            }
-        });
-
-        $(document).on('blur', '.mop', function() {
-            if ($(this).text().trim() !== '') { // Check if the input is not empty
-                mopUpdate(this);
-            }
-        });
-    });
-</script>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalImport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

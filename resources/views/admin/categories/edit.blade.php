@@ -39,7 +39,7 @@
                             enctype="multipart/form-data">@csrf @method('PUT')
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="image">Image * :</label>
                                         <input type="file" class="dropify @error('image') is-invalid @enderror"
@@ -57,63 +57,8 @@
                                         <kbd>This will display in the home page category slider</kbd>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="banner_image">Banner Image * :</label>
-                                        <input type="file"
-                                            class="dropify @error('banner_image') is-invalid @enderror"
-                                            name="banner_image" id="banner_image"
-                                            accept="image/jpg, image/jpeg, image/png,image/webp"
-                                            data-default-file="{{ asset('uploads/category/') }}/{{ $data->banner_image }}">
-                                        @error('banner_image')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <span class="font-13 text-muted">* Image size <code>1418 × 396
-                                                pixels</code></span> <br>
-                                        <kbd>Display in the view page of category listing.</kbd>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="homepage_side">Home Page Side Image * :</label>
-                                        <input type="file"
-                                            class="dropify @error('homepage_side') is-invalid @enderror"
-                                            name="homepage_side" id="homepage_side"
-                                            accept="image/jpg, image/jpeg, image/png,image/webp"
-                                            data-default-file="{{ asset('uploads/category/') }}/{{ $data->homepage_side }}">
-                                        @error('homepage_side')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <span class="font-13 text-muted">* Image size <code> 300 × 359
-                                                pixels</code></span> <br>
-                                        <kbd>First image in the home page product category wise display</kbd>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="homepage_side_mobile">Home Page Side Image (Mobile view) * :</label>
-                                        <input type="file"
-                                            class="dropify @error('homepage_side_mobile') is-invalid @enderror"
-                                            name="homepage_side_mobile" id="homepage_side_mobile"
-                                            accept="image/jpg, image/jpeg, image/png,image/webp"
-                                            data-default-file="{{ asset('uploads/category/') }}/{{ $data->homepage_side_mobile }}">
-                                        @error('homepage_side_mobile')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <span class="font-13 text-muted">* Image size <code> 295 x 150
-                                                pixels</code></span> <br>
-                                        <kbd>First image in the home page product category wise display in mobile
-                                            view</kbd>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
+                               
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category">Category Name* :</label>
                                         <input type="text"
@@ -144,68 +89,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="display_menu">Display in Menu * :</label>
-                                        <select class="form-control @error('display_menu') is-invalid @enderror"
-                                            name="display_menu" id="display_menu">
-                                            <option value="1" @if ($data->display_menu == 1) selected @endif>Yes
-                                            </option>
-                                            <option value="0" @if ($data->display_menu == 0) selected @endif>
-                                                No
-                                            </option>
-                                        </select>
-                                        @error('display_menu')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="display_home">Display in Home * :</label>
-                                        <select class="form-control @error('display_home') is-invalid @enderror"
-                                            name="display_home" id="display_home">
-                                            <option value="1" @if ($data->display_home == 1) selected @endif>
-                                                Yes</option>
-                                            <option value="0" @if ($data->display_home == 0) selected @endif>
-                                                No
-                                            </option>
-                                        </select>
-                                        @error('display_home')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="priority">Priority * :</label>
-                                        @if ($availablePriorities)
-                                        <select name="priority" id="priority" class="form-control">
-                                           
-                                                @foreach ($availablePriorities as $priority)
-                                                    <option value="{{ $priority }}">{{ $priority }}</option>
-                                                @endforeach
-                                                @if ($data->priority)
-                                                    <option value="{{ $data->priority }}" selected>
-                                                        {{ $data->priority }}
-                                                    </option>
-                                                @endif
-                                           
-                                        </select>
-                                        @else
-                                        <p>Not possible to add in the priority list</p>
-                                    @endif
-                                        @error('priority')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                              
 
                             </div>
 

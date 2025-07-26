@@ -57,19 +57,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="link">Link * :</label>
-                                        <input type="text" class="form-control @error('link') is-invalid @enderror"
-                                            name="link" id="link" value="{{ $data->link }}"
-                                            autocomplete="off">
-                                        @error('link')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
 
                             </div>
 

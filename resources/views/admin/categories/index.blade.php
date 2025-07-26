@@ -52,11 +52,7 @@
                                         <th>Id</th>
                                         <th>Title</th>
                                         <th>Image</th>
-                                        <th>Banner</th>
-                                        <th>Homepage Image</th>
                                         <th>Status</th>
-                                        <th>Manage Ads</th>
-                                        <th>Priority</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -78,30 +74,8 @@
                                                     <span class="badge badge-warning">No Image</span>
                                                 @endif
                                             </td>
-                                            <td>
-                                                @if ($data->banner_image != '')
-                                                    <a href="{{ asset('uploads/category') }}/{{ $data->banner_image }}"
-                                                        target="_blank">
-                                                        <img class="avatar-lg"
-                                                            src="{{ asset('uploads/category') }}/{{ $data->banner_image }}"
-                                                            alt="{{ $data->category }}">
-                                                    </a>
-                                                @else
-                                                    <span class="badge badge-warning">No Banner Image</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($data->homepage_side != '')
-                                                    <a href="{{ asset('uploads/category') }}/{{ $data->homepage_side }}"
-                                                        target="_blank">
-                                                        <img class="avatar-lg"
-                                                            src="{{ asset('uploads/category') }}/{{ $data->homepage_side }}"
-                                                            alt="{{ $data->category }}">
-                                                    </a>
-                                                @else
-                                                    <span class="badge badge-warning">No Home Image</span>
-                                                @endif
-                                            </td>
+                                          
+                                          
                                             <td>
                                                 @if ($data->status == '1')
                                                     <span class="badge badge-success">{{ 'Active' }}</span>
@@ -110,14 +84,7 @@
                                                     <span class="badge badge-danger">{{ 'Inactive' }}</span>
                                                 @endif
                                             </td>
-                                            <td>
-                                                <a href="{{ route('categories.ad_index', [$data->id]) }}"
-                                                    class="btn btn-dark waves-effect waves-light btn-xs"><i
-                                                        class="fas fa-plus"></i>Add New Ad</a>
-                                            </td>
-                                            <td>{{ $data->priority == 0?'Not given': $data->priority }}
-                                            </td>
-                                            <td>
+                                             <td>
                                                 <a href="{{ route('categories.edit', [$data->id]) }}"
                                                     class="btn btn-info waves-effect waves-light btn-xs"><i
                                                         class="fas fa-edit"></i></a>

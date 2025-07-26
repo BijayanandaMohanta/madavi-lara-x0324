@@ -76,64 +76,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="sub_category_id">Sub Category * :</label>
-                                        <select class="form-control @error('sub_category_id') is-invalid @enderror"
-                                            name="sub_category_id" id="sub_category_id">
-                                            <option selected disabled>Select Sub Category</option>
-                                            @foreach ($subcategories as $category)
-                                                <option value="{{ $category->id }}"
-                                                    @if ($category->id == $data->sub_category_id) selected @endif>
-                                                    {{ $category->category }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('sub_category_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="child_category_id">Child Category Name * :</label>
-                                        <select class="form-control @error('child_category_id') is-invalid @enderror"
-                                            name="child_category_id" id="child_category_id">
-                                            <option selected disabled>Select Child Category</option>
-                                            @foreach ($childcategories as $category)
-                                                <option value="{{ $category->id }}"
-                                                    @if ($category->id == $data->child_category_id) selected @endif>
-                                                    {{ $category->category }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('category')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="brand">Brand * :</label>
-                                        <select class="form-control @error('brand') is-invalid @enderror" name="brand"
-                                            id="brand">
-                                            <option selected disabled>Select Brand</option>
-                                            @foreach ($brands as $brand)
-                                                <option
-                                                    value="{{ $brand->brand }}"{{ $brand->brand == $data->brand ? 'selected' : '' }}>
-                                                    {{ $brand->brand }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('brand')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
+                               
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="gst">GST * :</label>
@@ -148,7 +91,7 @@
                                 </div>
 
                                 {{-- mrp --}}
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="mrp">MRP * :</label>
                                         <input type="number" class="form-control @error('mrp') is-invalid @enderror"
@@ -161,21 +104,10 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mop">MOP * :</label>
-                                        <input type="number" class="form-control @error('mop') is-invalid @enderror"
-                                            name="mop" id="mop" value="{{ $data->mop }}">
-                                        @error('mop')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                            
 
                                 {{-- price --}}
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="price">Price * :</label>
                                         <input type="number"
@@ -217,41 +149,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="tags">Tags * :</label>
-                                        <select class="form-control select2 @error('tags') is-invalid @enderror"
-                                            name="tags[]" id="tags" multiple>
-                                            <option value="" disabled>Select Tags</option>
-                                            @foreach ($tags as $tag)
-                                                <option value="{{ $tag->id }}"
-                                                    @if (in_array($tag->id, explode(',', $data->tags))) selected @endif>
-                                                    {!! $tag->tag !!}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('tags')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <style>
-                                    .select2-selection__choice {
-                                        background-color: #1f1f1f !important;
-                                    }
-                                </style>
-                                <script>
-                                    jQuery(document).ready(function($) {
-                                        $('.select2').select2();
-                                    });
-                                </script>
+                               
 
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="description">Description * :</label>
-                                        <textarea class="form-control sun-editor @error('description') is-invalid @enderror" name="description"
+                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description"
                                             id="description" rows="5" autocomplete="off">{{ $data->description }}</textarea>
                                         @error('description')
                                             <span class="invalid-feedback" role="alert">
@@ -262,7 +165,7 @@
                                 </div>
 
                                 {{-- specification need text editor --}}
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="specification">Specification * :</label>
                                         <textarea class="form-control sun-editor @error('specification') is-invalid @enderror" name="specification"
@@ -277,106 +180,10 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="warranty">Warranty * :</label>
-                                        <textarea class="form-control sun-editor @error('warranty') is-invalid @enderror" name="warranty" id="warranty"
-                                            rows="5" autocomplete="off">{{ $data->warranty }}</textarea>
-                                        @error('warranty')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label for="highlights">Highlights * :</label>
                                         <textarea class="form-control sun-editor @error('highlights') is-invalid @enderror" name="highlights"
                                             id="highlights" rows="5" autocomplete="off">{{ $data->highlights }}</textarea>
                                         @error('highlights')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="size_chart_image">Size chart image 1 * :</label>
-                                        <input type="file"
-                                            class="dropify @error('size_chart_image') is-invalid @enderror"
-                                            name="size_chart_image"
-                                            data-default-file="{{ asset('uploads/products') }}/{{ $data->size_chart_image }}"
-                                            id="size_chart_image" accept="image/jpg, image/jpeg, image/png">
-                                        @error('size_chart_image')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <kbd>Image size 900 x 450px</kbd>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="size_chart_image2">Size chart image 2 * :</label>
-                                        <input type="file"
-                                            class="dropify @error('size_chart_image2') is-invalid @enderror"
-                                            name="size_chart_image2"
-                                            data-default-file="{{ asset('uploads/products') }}/{{ $data->size_chart_image2 }}"
-                                            id="size_chart_image2" accept="image/jpg, image/jpeg, image/png">
-                                        @error('size_chart_image2')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <kbd>Image size 900 x 450px</kbd>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="size_chart_image3">Size chart image 3 * :</label>
-                                        <input type="file"
-                                            class="dropify @error('size_chart_image3') is-invalid @enderror"
-                                            name="size_chart_image3"
-                                            data-default-file="{{ asset('uploads/products') }}/{{ $data->size_chart_image3 }}"
-                                            id="size_chart_image3" accept="image/jpg, image/jpeg, image/png">
-                                        @error('size_chart_image3')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <kbd>Image size 900 x 450px</kbd>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="youtube_thumbnail">Youtube thumbnail * :</label>
-                                        <input type="file"
-                                            class="dropify @error('youtube_thumbnail') is-invalid @enderror"
-                                            name="youtube_thumbnail"
-                                            data-default-file="{{ asset('uploads/products') }}/{{ $data->youtube_thumbnail }}"
-                                            id="youtube_thumbnail" accept="image/jpg, image/jpeg, image/png">
-                                        @error('youtube_thumbnail')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <kbd>Image size 500 x 500px</kbd>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="youtube_video">Youtube Video * :</label>
-                                        <input type="text"
-                                            class="form-control @error('youtube_video') is-invalid @enderror"
-                                            name="youtube_video" id="youtube_video"
-                                            value="{{ $data->youtube_video }}">
-                                        @error('youtube_video')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

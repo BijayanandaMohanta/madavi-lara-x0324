@@ -1,20 +1,8 @@
 <?php
 
-use App\Http\Controllers\Frontend\CategoryController;
-use App\Http\Controllers\Frontend\CmsController;
-use App\Http\Controllers\Frontend\SellerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\LoginController;
-use App\Http\Controllers\Frontend\OtpController;
-use App\Http\Controllers\Frontend\PaymentController;
-use App\Http\Controllers\Frontend\ProductController;
-use App\Http\Controllers\Frontend\UserController;
-use App\Http\Controllers\Frontend\CartController;
-// Rozer pay
-use App\Http\Controllers\RazorpayController;
-use App\Http\Controllers\Cron\UpdateOrderStatusController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,129 +14,14 @@ use App\Http\Controllers\Cron\UpdateOrderStatusController;
 |
 */
 
-// Route to call the index function of UpdateOrderStatusController
-// Cron jobs
-
-Route::get('/cron/update-order-status', [UpdateOrderStatusController::class, 'update_order_status'])->name('cron.update_order_status');
-Route::get('/cron/check-pending-payments', [UpdateOrderStatusController::class, 'check_pending_payments'])->name('check_pending_payments');
-Route::get('/cron/wp-message-queue', [RazorpayController::class, 'wpQueueCron'])->name('wp_message_queue');
-
-
-// Rozer pay
-
-
-// Route::get('/razorpay-initiate', [RazorpayController::class, 'initiatePayment'])->name('razorpay.initiate');
-Route::any('/razorpay-callback', [RazorpayController::class, 'handleCallback'])->name('razorpay.callback');
-
 //Frontend routes
 Route::get("/", [HomeController::class, "index"])->name("home");
+Route::get("/about", [HomeController::class, "about"])->name("about");
+Route::get("/products", [HomeController::class, "products"])->name("products");
+Route::get("/product", [HomeController::class, "product"])->name("product");
+Route::get("/menu", [HomeController::class, "menu"])->name("menu");
+Route::get("/contact", [HomeController::class, "contact"])->name("contact");
 
-// CMS
-Route::get("/terms-of-service", [CmsController::class, "termsofservice"])->name("termsofservice");
-Route::get("/privacy-policy", [CmsController::class, "privacypolicy"])->name("privacypolicy");
-Route::get("/refund-policy", [CmsController::class, "refundpolicy"])->name("refundpolicy");
-Route::get("/shopping-policy", [CmsController::class, "shoppingpolicy"])->name("shoppingpolicy");
-Route::get("/payment-policy", [CmsController::class, "paymentpolicy"])->name("paymentpolicy");
-Route::get("/about-us", [CmsController::class, "aboutus"])->name("aboutus");
-Route::get("/contact-us", [CmsController::class, "contactus"])->name("contactus");
-Route::post('/contact-save', [CmsController::class, 'contactsave'])->name('contactsave');
-Route::get("/faq", [CmsController::class, "faq"])->name("faq");
-Route::get("/warranty", [CmsController::class, "warranty"])->name("warranty");
-Route::get("/story-gallery", [CmsController::class, "storegallery"])->name("storegallery");
-
-// Search & Category routes
-Route::get("/category-products-collection/{slug}", [CategoryController::class, "index"])->name("categorylist");
-Route::get("/child-category-products-collection/{slug}", [CategoryController::class, "childcategory"])->name("childcategorylist");
-Route::get("/sub-category-products-collection/{slug}", [CategoryController::class, "subcategorylist"])->name("subcategorylist");
-Route::get("/category/{slug}", [CategoryController::class, "category"])->name("category");
-Route::get("/brand-product-products-collection/{slug}", [CategoryController::class, "shopbybrandlist"])->name("shopbybrandlist");
-Route::get("/brand-product-list-filter", [CategoryController::class, "brandproductlistfilter"])->name("brandproductlistfilter");
-Route::get("/brands", [CategoryController::class, "shopbybrand"])->name("shopbybrand");
-Route::get("/deal-of-the-day", [CategoryController::class, "offer"])->name("offer");
-Route::get("/product/{slug}", [ProductController::class, "index"])->name("product");
-
-Route::get("/search-result", [ProductController::class, "search_result"])->name("search_result");
-Route::get("/rating-submit", [ProductController::class, "rating_submit"])->name("rating_submit");
-Route::post("/rating-update", [ProductController::class, "rating_update"])->name("rating_update");
-Route::post("/notify", [ProductController::class, "notify"])->name("notify");
-Route::post("/newsletter", [ProductController::class, "newsletter"])->name("newsletter");
-
-Route::get('/load-more-categories', [CategoryController::class, 'loadMoreCategories'])->name('load.more.categories');
-
-
-// User without Auth
-Route::get("/user-login", [LoginController::class, "index"])->name("userlogin");
-Route::post("/user-register", [LoginController::class, "userregister"])->name("userregister");
-Route::post("/checklog", [LoginController::class, "checklog"])->name("checklog");
-Route::get("/otp/{token}/{action?}", [OtpController::class, "index"])->name("otp");
-Route::post("/customer-otp-verify", [OtpController::class, "customer_otp_verify"])->name("customer-otp-verify");
-Route::post('/resend-otp', [OtpController::class, 'resendOtp'])->name('customer-resend-otp');
-Route::get("/forget-password", [LoginController::class, "forgetpassword"])->name("forgetpassword");
-Route::post("/forgot-password-otp-sent", [LoginController::class, "forgotpasswordotpsent"])->name("forgotpasswordotpsent");
-Route::post("/new-password-change", [LoginController::class, "new_password_change"])->name("new_password_change");
-
-// Seller routes
-Route::get("/seller-login", [SellerController::class, "index"])->name("sellerlogin");
-Route::post("/seller-register", [SellerController::class, "sellerregister"])->name("sellerregister");
-Route::post("/seller-checklog", [SellerController::class, "sellerchecklog"])->name("sellerchecklog");
-Route::get("/seller-otp/{token}/{action?}", [SellerController::class, "sellerotp"])->name("sellerotp");
-Route::post("/seller-otp-verify", [SellerController::class, "sellerotpverify"])->name("sellerotpverify");
-Route::post('/seller-resend-otp', [SellerController::class, 'sellerresendotp'])->name('sellerresendotp');
-
-// Sellers Auth
-Route::middleware(['seller.auth', 'no-cache'])->group(function () {
-    Route::get("/seller-profile", [SellerController::class, "sellerprofile"])->name('sellerprofile');
-    Route::get("/seller-logout", [SellerController::class, "sellerlogout"])->name('sellerlogout');
-});
-
-// Cart
-Route::any('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
-Route::any('/update-cart', [CartController::class, 'update_cart'])->name('cart.update');
-Route::any('/cart', [CartController::class, 'cart'])->name('cart');
-Route::any('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::any('/update-cart-data', [CartController::class, 'update_cart_data'])->name('cart_data.update');
-Route::any('/buy-now', [CartController::class, 'buy_now'])->name('cart.buy');
-Route::any('/filter-review', [ProductController::class, 'filterReviews'])->name('filter_review');
-Route::any("/invoice/{sid}", [CartController::class, "invoice"])->name("invoice");
-Route::any('/pincode-check-delivery', [ProductController::class, 'checkDelivery'])->name('check_delivery');
-Route::get('/track-order', [UserController::class, 'dashboardtrackorder'])->name('dashboardtrackorder');
-//Users Auth
-Route::middleware(['user.auth', 'no-cache'])->group(function () {
-    Route::get("/user-profile", [UserController::class, "userprofile"])->name("userprofile");
-    Route::post("/update-profile", [UserController::class, "updateprofile"])->name("updateprofile");
-    Route::get("/user-orders", [UserController::class, "userorders"])->name("userorders");
-    Route::get('/order/view', [UserController::class, 'view_order'])->name('order.view');
-    Route::get("/user-wishlist", [UserController::class, "userwishlist"])->name("userwishlist");
-    Route::get("/add-to-wishlist", [UserController::class, "addtowishlist"])->name("addtowishlist");
-    Route::get("/user-addresses", [UserController::class, "useraddress"])->name("useraddress");
-    Route::get("/user-edit-address/{id}", [UserController::class, "usereditaddress"])->name("usereditaddress");
-    Route::get("/delete-address/{id}", [UserController::class, "deleteaddress"])->name("deleteaddress");
-    Route::post("/user-update-address", [UserController::class, "userupdateaddress"])->name("userupdateaddress");
-    Route::any("/add-address", [UserController::class, "add_address"])->name("add-address");
-    Route::get("/user-reviews", [UserController::class, "userreviews"])->name("userreviews");
-    Route::get("/user-rewards", [UserController::class, "userrewards"])->name("userrewards");
-    Route::get("/user-logout", [UserController::class, "userlogout"])->name("userlogout");
-    Route::post("/address-submit", [UserController::class, "address_submit"])->name("address_submit");
-    Route::any('/checkout', [CartController::class, 'checkout'])->name('checkout');
-    Route::any('/bow-now-checkout', [CartController::class, 'buy_now_checkout'])->name('bow-now-checkout');
-    Route::any('/make-payment', [CartController::class, 'make_payment'])->name('make-payment');
-    Route::any('/buy-now-make-payment', [CartController::class, 'buy_now_make_payment'])->name('buy-now-make-payment');
-    Route::any('/use-coupon', [CartController::class, 'use_coupon'])->name('use-coupon');
-    Route::post("/cart-address-submit", [CartController::class, "cart_address_submit"])->name("cart_address_submit");
-    Route::any('/payment', [CartController::class, 'payment'])->name('payment');
-    Route::post("/initiate-payment", [CartController::class, "initiatepayment"])->name("initiatepayment");
-    Route::any("/place-order", [CartController::class, "place_order"])->name("place_order");
-    Route::any("/buy_now_place_order", [CartController::class, "buy_now_place_order"])->name("buy_now_place_order");
-    Route::any("/order-success", [CartController::class, "order_success"])->name("order-success");
-
-    Route::post("/change-address", [CartController::class, "change_address"])->name("change_address");
-    Route::post("/change-address-payment", [CartController::class, "change_address_payment"])->name("change_address_payment");
-});
-
-// No Cache URL
-Route::middleware(['no-cache'])->group(function () {
-    Route::any("/realtime-search-result", [ProductController::class, "realtime_search_result"])->name("realtime_search_result");
-});
 
 //Backend routes/Admin routes
 Auth::routes();

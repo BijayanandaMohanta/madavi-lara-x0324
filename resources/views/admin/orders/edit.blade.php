@@ -47,6 +47,8 @@
                                 @endif
                                 <h5 class="page-title">Order Id: <span
                                         class='text-primary'>#{{ $order->order_id }}</span></h5>
+                                <h5 class="page-title">Order Value: <span
+                                        class='text-primary'>Rs {{ round($order->grand_total-$order->coupon-$order->shipping_charges)}}</span></h5>
                                 <h5 class="page-title">Order Date: <span
                                         class='text-primary'>{{ \Carbon\Carbon::parse($order->updated_at)->format('d M Y h:i A') }}</span>
                                 </h5>
@@ -142,7 +144,7 @@
                         <hr>
                         <div class="row">
                             @php
-                                $setting = \App\Setting::first();
+                                $setting = \App\Models\Setting::first();
                             @endphp
                             <div class="col-4 dashdelvbox">
                                 <h5 style="margin: 0;">Sold By :</h5> <br>
@@ -199,7 +201,7 @@
                                     <th>Image</th>
                                     <th>Quantity</th>
                                     <th>Sub Total</th>
-                                    <th>Sl No</th>
+                                    {{-- <th>Sl No</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -217,10 +219,10 @@
                                         </td>
                                         <td>{{ $data->quantity }}</td>
                                         <td>Rs. {{ $data->sub_total }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <input type="text" class="form-control" name="sl_no" value="{{$data->sl_no}}"
                                                 onblur="update_cart_sl_no(this.value,{{ $data->id }},{{ $data->product_id }})">
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

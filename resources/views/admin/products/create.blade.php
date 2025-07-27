@@ -39,7 +39,7 @@
 
                             <div class="row">
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Product Name * :</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -69,77 +69,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
-                                
-
-                                {{-- gst input allow only number --}}
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="gst">GST * :</label>
-                                        <input type="number" class="form-control @error('gst') is-invalid @enderror"
-                                            name="gst" id="gst" value="{{ old('gst') }}">
-                                        @error('gst')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                {{-- mrp --}}
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="mrp">MRP * :</label>
-                                        <input type="number" class="form-control @error('mrp') is-invalid @enderror"
-                                            name="mrp" id="mrp" value="{{ old('mrp') }}">
-                                        @error('mrp')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                               
-                                {{-- price --}}
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="price">Price * :</label>
-                                        <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                            name="price" id="price" value="{{ old('price') }}">
-                                        @error('price')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                {{-- stock --}}
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="stock">Stock * :</label>
-                                        <input type="number" class="form-control @error('stock') is-invalid @enderror"
-                                            name="stock" id="stock" value="{{ old('stock') }}">
-                                        @error('stock')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="min_stock">Minimum Stock * :</label>
-                                        <input type="number" class="form-control @error('min_stock') is-invalid @enderror"
-                                            name="min_stock" id="min_stock" value="{{ old('min_stock') }}">
-                                        @error('min_stock')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                             
                             
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -158,7 +87,7 @@
                                 {{-- specification need text editor --}}
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="specification">Specification * :</label>
+                                        <label for="specification">Product Details * :</label>
                                         <textarea class="form-control sun-editor @error('specification') is-invalid @enderror"
                                             name="specification" id="specification" rows="5"
                                             autocomplete="off">{{ old('specification') }}</textarea>
@@ -173,7 +102,7 @@
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="highlights">Highlights * :</label>
+                                        <label for="highlights">Additional Information * :</label>
                                         <textarea class="form-control sun-editor @error('highlights') is-invalid @enderror"
                                             name="highlights" id="highlights" rows="5"
                                             autocomplete="off">{{ old('highlights') }}</textarea>
@@ -182,6 +111,20 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="size_chart_image">Product Detail Image * :</label>
+                                        <input type="file" class="dropify @error('size_chart_image') is-invalid @enderror"
+                                            name="size_chart_image" id="size_chart_image" accept="image/jpg, image/jpeg, image/png">
+                                        @error('size_chart_image')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <kbd>Image size 900 x 450px</kbd>
                                     </div>
                                 </div>
                                 

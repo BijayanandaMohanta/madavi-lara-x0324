@@ -213,9 +213,8 @@
                                                         @foreach ($units as $item)
                                                             <option value="{{ $item->id }}"
                                                                 data-image="{{ $item->image }}"
-                                                                data-stock="{{ $item->stock }}">
-                                                                {{ $item->name }} - <b>STOCK:
-                                                                    {{ $item->stock }}</b>
+                                                                >
+                                                                {{ $item->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -227,8 +226,7 @@
                                                 <td>
                                                     <input type="text" class="form-control quantity-field"
                                                         name="quantity[]" placeholder="Enter Quantity" required>
-                                                    <span class="error-message text-danger"
-                                                        style="display: none;">Quantity exceeds available stock.</span>
+                                                    
                                                 </td>
                                                 <td>
                                                     <button
@@ -354,8 +352,8 @@
                         <select class="form-control select-product" name="product_id[]">
                             <option data-src="https://cdn-icons-png.flaticon.com/128/5337/5337564.png" disabled selected>Select Product</option>
                             @foreach ($units as $item)
-                                <option value="{{ $item->id }}" data-image="{{ $item->image }}" data-stock="{{ $item->stock }}">
-                                    {{ $item->name }} - <b>STOCK: {{ $item->stock }}</b>
+                                <option value="{{ $item->id }}" data-image="{{ $item->image }}">
+                                    {{ $item->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -365,7 +363,6 @@
                     </td>
                     <td>
                         <input type="text" class="form-control quantity-field" name="quantity[]" placeholder="Enter Quantity" required>
-                        <span class="error-message text-danger" style="display: none;">Quantity exceeds available stock.</span>
                     </td>
                     <td>
                         <button class="btn btn-danger waves-effect waves-light btn-xs delete-button">
@@ -487,15 +484,14 @@
             }
         });
 
-        // Function to validate quantity against available stock
+       
         function validateQuantity(input) {
             // Find the closest row
             const row = input.closest('tr');
 
-            // Get the selected product's stock
+            
             const productSelect = row.querySelector('.select-product');
             const selectedOption = productSelect.options[productSelect.selectedIndex];
-            const availableStock = selectedOption ? parseInt(selectedOption.getAttribute('data-stock')) : 0;
 
             // Get the quantity input and error message elements
             const quantityInput = row.querySelector('.quantity-field');
@@ -503,16 +499,6 @@
 
             // Get the entered quantity
             const enteredQuantity = parseInt(quantityInput.value) || 0;
-
-            // Validate the quantity
-            if (enteredQuantity > availableStock) {
-                errorMessage.style.display = 'block'; // Show error message
-                quantityInput.setCustomValidity(
-                'Quantity exceeds available stock.'); // Set custom validation message
-            } else {
-                errorMessage.style.display = 'none'; // Hide error message
-                quantityInput.setCustomValidity(''); // Clear custom validation message
-            }
         }
 
     });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\CartController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
@@ -21,7 +22,7 @@ Route::get("/products", [HomeController::class, "products"])->name("products");
 Route::get("/product", [HomeController::class, "product"])->name("product");
 Route::get("/menu", [HomeController::class, "menu"])->name("menu");
 Route::get("/contact", [HomeController::class, "contact"])->name("contact");
-
+Route::any("/invoice/{sid}", [CartController::class, "invoice"])->name("invoice");
 
 //Backend routes/Admin routes
 Auth::routes();

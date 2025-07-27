@@ -64,7 +64,7 @@ class TeleorderController extends Controller
           throw new \Exception("Failed to write PDF file: " . $filePath);
       }
 
-      $filePath = "https://openboxwale.in/public/uploads/invoices/".$fileName;
+      $filePath = "./public/uploads/invoices/".$fileName;
       return $filePath;
 
       //return response()->file(public_path("uploads/invoices/$fileName"));
@@ -75,8 +75,7 @@ class TeleorderController extends Controller
 
   public function index()
   {
-    $units = Product::where('stock', '>', 0)
-      ->where('status', 1)
+    $units = Product::where('status', 1)
       ->get();
     $units->each(function ($product) {
       $product->image = $product->productimages->first()->image ?? "no-image";
@@ -154,27 +153,31 @@ class TeleorderController extends Controller
         $product_data = Product::where('id', $product_id)->first();
 
         // Discount Calculation For Custom price given
-        $custom_discount += $product_data->price - $product_price;
+        if ($product_data->price > $product_price) {
+          $custom_discount += $product_data->price - $product_price;
+        } else {
+          $custom_discount += 0;
+        }
         $custom_discount = $custom_discount * $qty;
 
         $add_result = new Cart();
         $add_result->product_id = $product_id;
         $add_result->product_name = $product_data->name;
         $add_result->category_id = $product_data->category_id;
-        $add_result->sub_category_id = $product_data->sub_category_id;
-        $add_result->child_category_id = $product_data->child_category_id;
-        $add_result->brand = $product_data->brand;
+        $add_result->sub_category_id = $product_data->sub_category_id ?? null;
+        $add_result->child_category_id = $product_data->child_category_id ?? null;
+        $add_result->brand = $product_data->brand ?? 'N/A';
         $add_result->sid = $sid;
-        $add_result->mrp = $product_data->mrp;
-        $add_result->price = $product_data->price;
-        $add_result->mop = $product_data->mop;
+        $add_result->mrp = $product_data->mrp ?? 0;
+        $add_result->price = $product_price;
+        $add_result->mop = $product_data->mop ?? 0;
         $add_result->status = $status;
         $add_result->quantity = $qty;
         $currentDateTime = date('Y-m-d H:i:s'); // Get current date and time
         $add_result->added_date_time = $currentDateTime;
         $timestamp = strtotime($currentDateTime);
         $add_result->str_added_date = $timestamp;
-        $add_result->sub_total = $qty * $product_data->price;
+        $add_result->sub_total = $qty * $product_price;
         $add_result->save();
       }
     }
@@ -221,24 +224,6 @@ class TeleorderController extends Controller
 
     $carts = Cart::where('sid', $sid)->get();
 
-    //dd($carts);
-    foreach ($carts as $cart) {
-      $product_image = ProductImage::where('product_id', $cart->product_id)->orderBy('priority', 'asc')->first();
-      $cart->image = $product_image->image ?? "no-image";
-      $product_data = Product::where('id', $cart->product_id)->first();
-
-      //update Stock
-      $balance = $product_data->stock - $cart->quantity;
-      $product_data->stock = $balance;
-      $product_data->save();
-
-      $remark = $cart->quantity . '' . " Debited As Tele Order Having Order Id #$order_id";
-      $stock = new ProductStock();
-      $stock->type = 'Debit';
-      $stock->remark = $remark;
-      $stock->product_id = $cart->product_id;
-      $stock->save();
-    }
     if ($data['email']) {
       $cart_address = CartAddress::where("sid", $sid)->first();
       $ord = Order::where("sid", $sid)->first();
@@ -277,13 +262,13 @@ class TeleorderController extends Controller
       $wp_queue->status = 'Pending';
       $wp_queue->save();
 
-      $attachment_link = $this->invoiceGenerate($sid);
+      // $attachment_link = $this->invoiceGenerate($sid);
 
       // dd($attachment_link);
 
-      $file_name = "inv_$order_id";
+      // $file_name = "inv_$order_id";
 
-      (new HelperController)->sendWhatsappMessageWithPdf($data['mobile'], 'open_feedback', $file_name, $attachment_link, $order_id);
+      // (new HelperController)->sendWhatsappMessageWithPdf($data['mobile'], 'open_feedback', $file_name, $attachment_link, $order_id);
     }
 
     return redirect()->route('orders.index')->with('primary', 'Order Updated Successfully');

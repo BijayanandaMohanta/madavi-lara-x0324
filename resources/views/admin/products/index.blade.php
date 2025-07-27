@@ -69,7 +69,6 @@
                                         <th>S.No</th>
                                         <th>Category</th>
                                         <th>Name</th>
-                                        <th>Stock</th>
                                         {{-- <th>Modified At</th> --}}
                                         <th>Manage Image</th>
                                         <th>Status</th>
@@ -87,13 +86,6 @@
                                             </td>
                                             <td>{{ $data->name }}</td>
                                            
-                                            
-
-
-
-                                            <td>
-                                                <span id="product_{{ $data->id }}">{{ $data->stock }}</span>
-                                            </td>
                                             {{-- <td> <span class="badge badge-success">{{ \Carbon\Carbon::parse($data->updated_at)->format('d M Y h:i A') }}</span>
                                             </td> --}}
                                             <td>

@@ -352,10 +352,10 @@
                                                             href="{{ route('invoice', $data->sid ?? 'N/A') }}"
                                                             class="btn btn-dark waves-effect waves-light btn-xs mt-1"><i
                                                             class="fas fa-print"></i></a>
-                                                            
+{{--                                                             
                                                             <a href="{{ route('invoice-generate', [$data->sid ?? 'N/A']) }}"
                                                                 class="btn btn-danger waves-effect waves-light btn-xs"><i
-                                                                    class="fas fa-download"></i></a>
+                                                                    class="fas fa-download"></i></a> --}}
 
                                                 </td>
 

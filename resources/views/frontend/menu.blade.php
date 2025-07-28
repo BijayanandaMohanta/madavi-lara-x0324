@@ -26,12 +26,13 @@
     <div class="rts-service-area rts-section-gap2 bg_light-1">
         <div class="container-3">
             <div class="row align-items-center">
+                @forelse ($menus as $menu)
                 <div class="col-lg-6">
-                    <img src="{{asset('frontend/assets')}}/images/menu-front.jpg" alt="" class="w-100">
+                    <img src="{{asset("uploads/menus/$menu->image")}}" alt="" class="w-100">
                 </div>
-                <div class="col-lg-6">
-                    <img src="{{asset('frontend/assets')}}/images/menu-back.jpg" alt="" class="w-100">
-                </div>
+                @empty
+                  <p>No menu uploaded</p>  
+                @endforelse
             </div>
         </div>
     </div>

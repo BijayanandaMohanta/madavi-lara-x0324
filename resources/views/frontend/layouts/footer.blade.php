@@ -24,11 +24,12 @@
                             <h3 class="footer-title">Our Products</h3>
                             <div class="footer-nav">
                                 <ul>
-                                    <li><a href="{{route('products')}}">Pickles</a></li>
-                                    <li><a href="{{route('products')}}">Sweets</a></li>
-                                    <li><a href="{{route('products')}}">Powders</a></li>
-                                    <li><a href="{{route('products')}}">Sweets</a></li>
-                                    <li><a href="{{route('products')}}">Ghee</a></li>
+                                    @php
+                                            $categories = App\Models\Category::where('status',1)->get();
+                                        @endphp
+                                        @foreach ($categories as $category)  
+                                            <li><a href="{{route('products',$category->slug)}}">{{$category->category}}</a></li>
+                                        @endforeach
                                 </ul>
                             </div>
                         </div>

@@ -18,8 +18,8 @@ use App\Http\Controllers\Frontend\HomeController;
 //Frontend routes
 Route::get("/", [HomeController::class, "index"])->name("home");
 Route::get("/about", [HomeController::class, "about"])->name("about");
-Route::get("/products", [HomeController::class, "products"])->name("products");
-Route::get("/product", [HomeController::class, "product"])->name("product");
+Route::get("/products/{slug?}", [HomeController::class, "products"])->name("products");
+Route::get("/product/{slug}", [HomeController::class, "product"])->name("product");
 Route::get("/menu", [HomeController::class, "menu"])->name("menu");
 Route::get("/contact", [HomeController::class, "contact"])->name("contact");
 Route::any("/invoice/{sid}", [CartController::class, "invoice"])->name("invoice");
@@ -58,12 +58,14 @@ Route::group(['middleware' => ['isAdmin', 'auth']], function () {
 
     Route::resource('admin/pages', '\App\Http\Controllers\Admin\PagesController');
     Route::resource('admin/banners', '\App\Http\Controllers\Admin\BannersController');
+    Route::resource('admin/menus', '\App\Http\Controllers\Admin\MenusController');
     Route::resource('admin/ads', '\App\Http\Controllers\Admin\AdsController');
     Route::resource('admin/notification', '\App\Http\Controllers\Admin\NotificationController');
     // 2024-09-10T12:15:08.000-05:00
     Route::resource('admin/product', '\App\Http\Controllers\Admin\ProductController');
+    Route::resource('admin/product-price', '\App\Http\Controllers\Admin\PriceController');
     Route::resource('admin/faq', '\App\Http\Controllers\Admin\FaqController');
-
+    Route::resource('admin/about-us', '\App\Http\Controllers\Admin\AboutUsController');
     // Product price and mop update
     Route::any('admin/product_price_update', '\App\Http\Controllers\Admin\ProductController@product_price_update')->name('product_price_update');
     Route::any('admin/product_mop_update', '\App\Http\Controllers\Admin\ProductController@product_mop_update')->name('product_mop_update');

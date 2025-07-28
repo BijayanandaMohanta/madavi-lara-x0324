@@ -45,27 +45,49 @@
                                         <div class="form-group">
                                             <label for="image">Image * :</label>
                                             <input type="file" class="dropify @error('image') is-invalid @enderror" name="image"
-                                                   id="image" accept="image/jpg, image/jpeg, image/png" data-default-file="{{ asset('uploads/ads') }}/{{ $data->image }}">
+                                                   id="image" accept="image/jpg, image/jpeg, image/png" data-default-file="{{ asset($data->image) }}">
                                             @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
-                                            <span class="font-13 text-muted">* Image size <code>Ad 1 : 1418 x 396 pixels, Ad 2 : 519 x 300 pixels</code></span>
+                                            <span class="font-13 text-muted">* Image size <code>600px x 600px</code></span>
                                         </div>
                                     </div>
 
-                                  
-                                    <div class="col-md-6">
+                                   <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="fullname">Type * :</label>
-                                            <select class="form-control @error('type') is-invalid @enderror" name="type"
-                                                    id="type">
-                                                <option value="Home Ad1" @if($data->type == 'Home Ad1') selected @endif>Home Ad1</option>
-                                                <option value="Home Ad2" @if($data->type == 'Home Ad2') selected @endif>Home Ad2</option>
-                                                
-                                            </select>
-                                            @error('type')
+                                            <label for="tag">Tag   :</label>
+                                            <input type="text" class="form-control @error('tag') is-invalid @enderror"
+                                                   name="tag" id="tag" value="{{ $data->tag }}"
+                                                   autocomplete="off">
+                                            @error('tag')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="title">Title   :</label>
+                                            <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                                   name="title" id="title" value="{{ $data->title }}"
+                                                   autocomplete="off">
+                                            @error('title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="sub_title">Sub title   :</label>
+                                            <input type="text" class="form-control @error('sub_title') is-invalid @enderror"
+                                                   name="sub_title" id="sub_title" value="{{ $data->sub_title }}"
+                                                   autocomplete="off">
+                                            @error('sub_title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -85,7 +107,25 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="status">Status * :</label>
+                                        <select class="form-control @error('status') is-invalid @enderror"
+                                            name="status" id="status">
+                                            <option value="1"
+                                                {{ old('status', $data->status ?? 1) == 1 ? 'selected' : '' }}>Active
+                                            </option>
+                                            <option value="0"
+                                                {{ old('status', $data->status ?? 1) == 0 ? 'selected' : '' }}>
+                                                Inactive</option>
+                                        </select>
+                                        @error('status')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 </div>
 
                                 <div class="form-group mb-0">

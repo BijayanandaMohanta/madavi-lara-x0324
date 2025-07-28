@@ -71,6 +71,7 @@
                                         <th>Name</th>
                                         {{-- <th>Modified At</th> --}}
                                         <th>Manage Image</th>
+                                        <th>Manage Prices</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -95,7 +96,14 @@
                                                 </a>
 
                                             </td>
-                                           
+                                           <td>
+                                                  
+                                                        <a href="{{ route("product-price.index", ['id'=>$data->id]) }}"
+                                                            class="btn btn-primary waves-effect waves-light btn-xs mb-1">
+                                                            Product Prices
+                                                        </a>
+                                                  
+                                                </td>
                                              <td>
                                                 @if ($data->status == '1')
                                                     <span class="badge badge-success">{{ 'Active' }}</span>

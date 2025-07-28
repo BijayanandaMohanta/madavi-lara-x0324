@@ -37,12 +37,12 @@
                                         <li class="parent has-dropdown">
                                             <a class="nav-link" href="#">Products</a>
                                             <ul class="submenu">
-                                                <li><a class="sub-b" href="{{route('products')}}">Veg Pickles</a></li>
-                                                <li><a class="sub-b" href="{{route('products')}}">Non-Veg Pickles</a></li>
-                                                <li><a class="sub-b" href="{{route('products')}}">Powders</a></li>
-                                                <li><a class="sub-b" href="{{route('products')}}">Sweets</a></li>
-                                                <li><a class="sub-b" href="{{route('products')}}">Snacks</a></li>
-                                                <li><a class="sub-b" href="{{route('products')}}">Ghee</a></li>
+                                                @php
+                                                    $categories = App\Models\Category::where('status',1)->get();
+                                                @endphp
+                                                @foreach ($categories as $category)  
+                                                    <li><a class="sub-b" href="{{route('products',$category->slug)}}">{{$category->category}}</a></li>
+                                                @endforeach
                                             </ul>
                                         </li>
 
@@ -118,12 +118,12 @@
                                 <li class="has-droupdown">
                                     <a href="#" class="main">Products</a>
                                     <ul class="submenu mm-collapse">
-                                        <li><a class="mobile-menu-link" href="{{route('products')}}">Veg Pickles</a></li>
-                                        <li><a class="mobile-menu-link" href="{{route('products')}}">Non-Veg Pickles</a></li>
-                                        <li><a class="mobile-menu-link" href="{{route('products')}}">Powders</a></li>
-                                        <li><a class="mobile-menu-link" href="{{route('products')}}">Sweets</a></li>
-                                        <li><a class="mobile-menu-link" href="{{route('products')}}">Snacks</a></li>
-                                        <li><a class="mobile-menu-link" href="{{route('products')}}">Ghee</a></li>
+                                        @php
+                                            $categories = App\Models\Category::where('status',1)->get();
+                                        @endphp
+                                        @foreach ($categories as $category)  
+                                            <li><a class="mobile-menu-link" href="{{route('products',$category->slug)}}">{{$category->category}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li>

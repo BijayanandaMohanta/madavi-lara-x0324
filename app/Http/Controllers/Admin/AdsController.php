@@ -24,14 +24,17 @@ class AdsController extends Controller
     {
         $data = $this->validate($request, [
             'image' => 'required|mimes:jpg,jpeg,png',
-            'type' => 'required',
+            'tag' => 'required',
+            'title' => 'required',
+            'sub_title' => 'required',
             'link' => 'nullable',
+            'status' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
             $image = 'ads_' . rand() . '.' . $request->image->extension();
-            $data['image'] = $image;
-            //dd($data['image']);
+            $imagePath = 'uploads/ads/' . $image;
+            $data['image'] = $imagePath;
             $request->image->move(public_path('uploads/ads'), $image);
         }
 
@@ -50,13 +53,17 @@ class AdsController extends Controller
     {
         $data = $this->validate($request, [
             'image' => 'mimes:jpg,jpeg,png',
-            'type' => 'required',
+            'tag' => 'required',
+            'title' => 'required',
+            'sub_title' => 'required',
             'link' => 'nullable',
+            'status' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
             $image = 'ads_' . rand() . '.' . $request->image->extension();
-            $data['image'] = $image;
+            $imagePath = 'uploads/ads/' . $image;
+            $data['image'] = $imagePath;
             $request->image->move(public_path('uploads/ads'), $image);
         }
 
@@ -65,12 +72,12 @@ class AdsController extends Controller
         return redirect()->route('ads.index')->with('success', 'Ads Data Updated :)');
     }
     public function destroy($id) {
-       $data = DB::connection('read')->table('ads')->where('id', $id)->first();
+       $data = Ad::find($id);
        $image_path = public_path("/uploads/ads/$data->image");
                 if (file_exists($image_path)) {
                     unlink($image_path);
                 }
-        (new Ad)->deleteData($id);
+        $data->delete();
         return redirect()->route('ads.index')->with('message', 'Ads Data Deleted');
     }
 }

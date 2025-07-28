@@ -49,28 +49,51 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
-                                            <span class="font-13 text-muted">* Image size <code>Ad 1 : 1418 x 396 pixels, Ad 2 : 519 x 300 pixels</code></span>
+                                            <span class="font-13 text-muted">* Image size <code>600px x 600px</code></span>
                                         </div>
                                     </div>
                                      
-
-                                    <div class="col-md-6">
+                                      <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="fullname">Type * :</label>
-                                            <select class="form-control @error('type') is-invalid @enderror" name="type"
-                                                    id="type">
-                                                    <option value="">Select</option>
-                                                
-                                                <option value="Home Ad1" >Home Ad1</option>
-                                                <option value="Home Ad2" >Home Ad2</option>
-                                            </select>
-                                            @error('type')
+                                            <label for="tag">Tag   :</label>
+                                            <input type="text" class="form-control @error('tag') is-invalid @enderror"
+                                                   name="tag" id="tag" value="{{ old('tag') }}"
+                                                   autocomplete="off">
+                                            @error('tag')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
                                         </div>
                                     </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="title">Title   :</label>
+                                            <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                                   name="title" id="title" value="{{ old('title') }}"
+                                                   autocomplete="off">
+                                            @error('title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="sub_title">Sub title   :</label>
+                                            <input type="text" class="form-control @error('sub_title') is-invalid @enderror"
+                                                   name="sub_title" id="sub_title" value="{{ old('sub_title') }}"
+                                                   autocomplete="off">
+                                            @error('sub_title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                  
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="link">Link   :</label>
@@ -84,7 +107,21 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="status">Status * :</label>
+                                        <select class="form-control @error('status') is-invalid @enderror" name="status"
+                                                id="status">
+                                            <option value="1" selected>Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                        @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 </div>
 
                                 <div class="form-group mb-0">

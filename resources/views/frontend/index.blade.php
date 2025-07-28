@@ -41,54 +41,14 @@
                                 }
                             }'>
                             <div class="swiper-wrapper">
-                                <!-- single swiper start -->
+                                @foreach ($banners as $banner)
+                                    
+                               
                                 <div class="swiper-slide">
-                                    <div class="banner-bg-image custom_pad bg_image bg_one-banner">
-                                        <!-- <div class="banner-one-inner-content">
-                                            <span class="pre">Get up to 30% off on your first ₹599 purchase</span>
-                                            <h1 class="title">
-                                                    A soulful destination of<br>
-Pickles, Powders, Savouries & more
-                                                </h1>
-                                            <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                <div class="btn-text">
-                                                    Shop Now
-                                                </div>
-                                                <div class="arrow-icon">
-                                                    <i class="fa-light fa-arrow-right"></i>
-                                                </div>
-                                                <div class="arrow-icon">
-                                                    <i class="fa-light fa-arrow-right"></i>
-                                                </div>
-                                            </a>
-                                        </div> -->
+                                    <div class="banner-bg-image custom_pad bg_image bg_one-banner" style="background-image: url('{{asset("uploads/banners/$banner->image")}}')">
                                     </div>
                                 </div>
-                                <!-- single swiper start -->
-                                <!-- single swiper start -->
-                                <div class="swiper-slide">
-                                    <div class="banner-bg-image custom_pad bg_image bg_one-banner two">
-                                        <!-- <div class="banner-one-inner-content">
-                                            <span class="pre">Get up to 30% off on your first ₹599 purchase</span>
-                                            <h1 class="title">
-                                                    Authentic Indian Sweet <br>
-                                                     Indulgence
-                                                </h1>
-                                            <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                <div class="btn-text">
-                                                    Shop Now
-                                                </div>
-                                                <div class="arrow-icon">
-                                                    <i class="fa-light fa-arrow-right"></i>
-                                                </div>
-                                                <div class="arrow-icon">
-                                                    <i class="fa-light fa-arrow-right"></i>
-                                                </div>
-                                            </a>
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <!-- single swiper start -->
+                                 @endforeach
                             </div>
 
                             <button class="swiper-button-next"><i class="fa-regular fa-arrow-right"></i></button>
@@ -160,83 +120,21 @@ Pickles, Powders, Savouries & more
                                                     }
                                                 }'>
                                                     <div class="swiper-wrapper">
-                                                        <!-- single swiper start -->
+                                                        @foreach ($categories as $category)
+                                                            
+                                                       
                                                         <div class="swiper-slide">
                                                             <div class="single-category-one">
                                                                 <a href="#" class="thumbnail">
-                                                                    <img src="{{asset('frontend/assets')}}/images/category/01.png" alt="category">
+                                                                    <img src="{{asset("uploads/category/$category->image")}}" alt="category">
                                                                 </a>
                                                                 <div class="inner-content-category">
-                                                                    <p>Veg Pickles</p>
-                                                                    <span>23 items</span>
+                                                                    <p>{{$category->category}}</p>
+                                                                    <span>{{$category->products->count() ?? 0}} items</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- single swiper start -->
-                                                        <!-- single swiper start -->
-                                                        <div class="swiper-slide">
-                                                            <div class="single-category-one">
-                                                                <a href="#" class="thumbnail">
-                                                                    <img src="{{asset('frontend/assets')}}/images/category/02.png" alt="category">
-                                                                </a>
-                                                                <div class="inner-content-category">
-                                                                    <p>Non-Veg Pickles</p>
-                                                                    <span>12 Items</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- single swiper start -->
-                                                        <!-- single swiper start -->
-                                                        <div class="swiper-slide">
-                                                            <div class="single-category-one">
-                                                                <a href="#" class="thumbnail">
-                                                                    <img src="{{asset('frontend/assets')}}/images/category/03.png" alt="category">
-                                                                </a>
-                                                                <div class="inner-content-category">
-                                                                    <p>Powders</p>
-                                                                    <span>14 Items</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- single swiper start -->
-                                                        <!-- single swiper start -->
-                                                        <div class="swiper-slide">
-                                                            <div class="single-category-one">
-                                                                <a href="#" class="thumbnail">
-                                                                    <img src="{{asset('frontend/assets')}}/images/category/04.png" alt="category">
-                                                                </a>
-                                                                <div class="inner-content-category">
-                                                                    <p>Sweets</p>
-                                                                    <span>20 Items</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- single swiper start -->
-                                                        <!-- single swiper start -->
-                                                        <div class="swiper-slide">
-                                                            <div class="single-category-one">
-                                                                <a href="#" class="thumbnail">
-                                                                    <img src="{{asset('frontend/assets')}}/images/category/05.png" alt="category">
-                                                                </a>
-                                                                <div class="inner-content-category">
-                                                                    <p>Snacks</p>
-                                                                    <span>18 Items</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- single swiper start -->
-                                                        <!-- single swiper start -->
-                                                        <div class="swiper-slide">
-                                                            <div class="single-category-one">
-                                                                <a href="#" class="thumbnail">
-                                                                    <img src="{{asset('frontend/assets')}}/images/category/06.png" alt="category">
-                                                                </a>
-                                                                <div class="inner-content-category">
-                                                                    <p>Ghee</p>
-                                                                    <span>4 Items</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                         @endforeach
                                                         
                                                     </div>
                                                 </div>
@@ -262,21 +160,17 @@ Pickles, Powders, Savouries & more
             <div class="row align-items-center">
                 <div class="col-lg-4">
                     <div class="thumbnail-left">
-                        <img src="{{asset('frontend/assets')}}/images/about/02.jpg" alt="">
+                        <img src="{{asset("uploads/$about->image")}}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-8 pl--60 pl_md--10 pt_md--30 pl_sm--10 pt_sm--30">
                     <div class="about-content-area-1">
                         <h2 class="title">
-                            A Taste of Tradition, A Spoonful of Nostalgia
+                            {{$about->title}}
                         </h2>
-                        <p class="disc">
-                            Welcome to Madavi Homemade Foods, where every jar tells a story, every bite brings back a memory, and every flavor is a tribute to the kitchens of our mothers and grandmothers. Born out of a deep-rooted passion for preserving the rich culinary traditions of Indian homes, Madavi Homemade Foods is not just a brand—it's a family movement led by homemakers who
-grew up watching their elders stir magic into masalas, sun-dry mangoes for weeks, and pour love into every pickle jar
-                        </p>
-                        <p class="disc">Our journey began with a simple intention: to bring back the soul of home-cooked food, especially the kind that made our childhood special. What started in our humble kitchens became a heartwarming venture when one of our regular customers, with teary eyes, said — “I haven’t tasted pickles like this since my granny passed away. You brought back my childhood in a spoonful.”
-</p>
-                        <h5 class="text-center disc">"That’s when we realized—we weren’t just making food. We were bottling emotions, memories, and traditions."</h5>
+                        <div>
+                            {!!$about->description!!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,15 +182,18 @@ grew up watching their elders stir magic into masalas, sun-dry mangoes for weeks
     <div class="category-feature-area rts-section-gap">
         <div class="container">
             <div class="row g-4">
+                @foreach ($ads as $ad)
+                    
+              
                 <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                    <div class="single-feature-card bg_image one">
+                    <div class="single-feature-card bg_image one" style="background-image: url({{asset($ad->image)}});">
                         <div class="content-area">
-                            <a href="#" class="rts-btn btn-primary">Weekend Discount</a>
+                            <a href="{{$ad->link}}" class="rts-btn btn-primary">{{$ad->tag}}</a>
                             <h3 class="title">
-                                Tomato Pickle <br>
-                                <span>Good Taste</span>
+                                {{$ad->title}} <br>
+                                <span>{{$ad->sub_title}}</span>
                             </h3>
-                            <a href="#" class="shop-now-goshop-btn">
+                            <a href="{{$ad->link}}" class="shop-now-goshop-btn">
                                 <span class="text">Shop Now</span>
                                 <div class="plus-icon">
                                     <i class="fa-sharp fa-regular fa-plus"></i>
@@ -308,66 +205,7 @@ grew up watching their elders stir magic into masalas, sun-dry mangoes for weeks
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                    <div class="single-feature-card bg_image two">
-                        <div class="content-area">
-                            <a href="#" class="rts-btn btn-primary">Weekend Discount</a>
-                            <h3 class="title">
-                                Chekodi Nuvvulu <br>
-                                <span>Snacks</span>
-                            </h3>
-                            <a href="#" class="shop-now-goshop-btn">
-                                <span class="text">Shop Now</span>
-                                <div class="plus-icon">
-                                    <i class="fa-sharp fa-regular fa-plus"></i>
-                                </div>
-                                <div class="plus-icon">
-                                    <i class="fa-sharp fa-regular fa-plus"></i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                    <div class="single-feature-card bg_image three">
-                        <div class="content-area">
-                            <a href="#" class="rts-btn btn-primary">Weekend Discount</a>
-                            <h3 class="title">
-                                Mutton Boneless<br>
-                                <span>Non-Veg Pickle</span>
-                            </h3>
-                            <a href="#" class="shop-now-goshop-btn">
-                                <span class="text">Shop Now</span>
-                                <div class="plus-icon">
-                                    <i class="fa-sharp fa-regular fa-plus"></i>
-                                </div>
-                                <div class="plus-icon">
-                                    <i class="fa-sharp fa-regular fa-plus"></i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                    <div class="single-feature-card bg_image four">
-                        <div class="content-area">
-                            <a href="#" class="rts-btn btn-primary">Weekend Discount</a>
-                            <h3 class="title">
-                                Mysore Pak Signature 
-                                <span>Sweets</span>
-                            </h3>
-                            <a href="#" class="shop-now-goshop-btn">
-                                <span class="text">Shop Now</span>
-                                <div class="plus-icon">
-                                    <i class="fa-sharp fa-regular fa-plus"></i>
-                                </div>
-                                <div class="plus-icon">
-                                    <i class="fa-sharp fa-regular fa-plus"></i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                  @endforeach
             </div>
         </div>
     </div>
@@ -384,18 +222,11 @@ grew up watching their elders stir magic into masalas, sun-dry mangoes for weeks
                             Our Products
                         </h2>
                         <ul class="nav nav-tabs best-selling-grocery" id="myTab" role="tablist">
+                            @foreach ($categories as $category)
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#veg-pickles" type="button" role="tab" aria-controls="home" aria-selected="true">Veg Pickles</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#non-veg-pickles" type="button" role="tab" aria-controls="profile" aria-selected="false">Non-Veg Pickles</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#powders" type="button" role="tab" aria-controls="contact" aria-selected="false">Powders</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="vitamine-tab" data-bs-toggle="tab" data-bs-target="#sweets" type="button" role="tab" aria-controls="vitamine" aria-selected="false">Sweets</button>
-                            </li>
+                                <button class="nav-link {{$loop->first ? 'Active' : ''}}" id="cat-tab-{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#tab-{{$loop->index}}" type="button" role="tab" aria-controls="cat" aria-selected="true">{{$category->category}}</button>
+                            </li> 
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -404,37 +235,42 @@ grew up watching their elders stir magic into masalas, sun-dry mangoes for weeks
                 <div class="col-lg-12">
                     <div class="tab-content" id="myTabContent">
                         <!-- first tabs area start-->
-                        <div class="tab-pane fade show active" id="veg-pickles" role="tabpanel" aria-labelledby="home-tab">
+                        @foreach ($categories as $category)
+                        <div class="tab-pane fade {{$loop->first ? 'show active' : ''}} " id="tab-{{$loop->index}}" role="tabpanel" aria-labelledby="cat-tab-{{$loop->index}}">
                             <div class="row g-4">
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+                                @forelse ($category->products as $product)
+                                    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <div class="single-shopping-card-one">
                                         <!-- iamge and sction area start -->
                                         <div class="image-and-action-area-wrapper">
-                                            <a href="{{route('product')}}" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/01.jpg" alt="">
+                                            <a href="{{route('product',$product->slug)}}" class="thumbnail-preview">
+                                                <img src="{{asset("uploads/products/{$product->productimages()->first()->image}")}}" alt="{{$product->name}}">
                                             </a>
 
                                         </div>
                                         <!-- iamge and sction area start -->
                                         <div class="body-content">
 
-                                            <a href="{{route('product')}}">
-                                                <h4 class="title">Mango Avakaya</h4>
+                                            <a href="{{route('product',$product->slug)}}">
+                                                <h4 class="title">{{$product->name}}</h4>
                                             </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
+                                            <p class="mb--10">{{ \Illuminate\Support\Str::words($product->description, 8) }}</p>
 
                                             <span class="price">Availble Quantity :</span>
                                             <div class="price-tag">
                                                 <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
+                                                    @php
+                                                        $btn_color = ['warning','danger','light','dark'];
+                                                    @endphp
+                                                    @foreach ($product->prices as $price)
+                                                        <li class="btn-{{$btn_color[$loop->index]}}">{{$price->quantity}} - <span class="current">₹{{$price->amount}}/-</span></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
 
                                             
                                             <div class="cart-counter-action">
-                                                <a href="{{route('product')}}" class="rts-btn btn-primary radious-sm with-icon">
+                                                <a href="{{route('product',$product->slug)}}" class="rts-btn btn-primary radious-sm with-icon">
                                                     <div class="btn-text">
                                                        Order Now
                                                     </div>
@@ -449,1313 +285,14 @@ grew up watching their elders stir magic into masalas, sun-dry mangoes for weeks
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="{{route('product')}}" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/02.jpg" alt="">
-                                            </a>
-
-
-
-                                        </div>
-                                        
-                                        <div class="body-content">
-
-                                            <a href="{{route('product')}}">
-                                                <h4 class="title">Tomato Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            
-                                            <div class="cart-counter-action">
-                                                <a href="{{route('product')}}" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/03.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Lemon Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/04.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Gongura Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/05.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Garlic Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/06.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Chilli Pickles </h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/07.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Mixed Vegetable Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/08.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Ginger</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @empty
+                                    <p>No Product Found!</p>
+                                @endforelse
+                                
                             </div>
                         </div>
+                        @endforeach
                         <!-- first tabs area start-->
-
-                        <div class="tab-pane fade" id="non-veg-pickles" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row g-4">
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/09.jpg" alt="">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Chicken Bone</h4>
-                                            </a>
-                                            <p class="mb--10">A spicy, flavorful delight made with tender chicken bones and authentic homemade spices. </p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹450/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹900/-</span></li>
-                                                </ul>
-                                            </div>
-
-                                            
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/10.jpg" alt="">
-                                            </a>
-
-
-
-                                        </div>
-                                        
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Chicken Boneless</h4>
-                                            </a>
-                                            <p class="mb--10">A rich, spicy, and flavorful pickle made with tender boneless chicken and aromatic homemade spices.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹750/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹1500/-</span></li>
-                                                </ul>
-                                            </div>
-                                            
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/03.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Lemon Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/04.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Gongura Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/05.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Garlic Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/06.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Chilli Pickles </h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/07.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Mixed Vegetable Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/08.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Ginger</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="powders" role="tabpanel" aria-labelledby="contact-tab">
-                            <div class="row g-4">
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/01.jpg" alt="">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Mango Avakaya</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-
-                                            
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/02.jpg" alt="">
-                                            </a>
-
-
-
-                                        </div>
-                                        
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Tomato Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/03.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Lemon Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/04.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Gongura Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/05.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Garlic Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/06.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Chilli Pickles </h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/07.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Mixed Vegetable Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/08.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Ginger</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="sweets" role="tabpanel" aria-labelledby="vitamine-tab">
-                            <div class="row g-4">
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/01.jpg" alt="">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Mango Avakaya</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-
-                                            
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/02.jpg" alt="">
-                                            </a>
-
-
-
-                                        </div>
-                                        
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Tomato Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/03.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Lemon Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/04.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Gongura Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/05.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Garlic Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/06.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Chilli Pickles </h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/07.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Mixed Vegetable Pickle</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="single-shopping-card-one">
-                                        <!-- iamge and sction area start -->
-                                        <div class="image-and-action-area-wrapper">
-                                            <a href="#" class="thumbnail-preview">
-
-                                                <img src="{{asset('frontend/assets')}}/images/grocery/08.jpg" alt="grocery">
-                                            </a>
-
-                                        </div>
-                                        <!-- iamge and sction area start -->
-                                        <div class="body-content">
-
-                                            <a href="#">
-                                                <h4 class="title">Ginger</h4>
-                                            </a>
-                                            <p class="mb--10">Spicy, tangy, and bold Andhra-style delight.</p>
-
-                                            <span class="price">Availble Quantity :</span>
-                                            <div class="price-tag">
-                                                <ul>
-                                                    <li class="btn-warning">500 G - <span class="current">₹300/-</span></li>
-                                                    <li class="btn-danger">01 KG - <span class="current">₹600/-</span></li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-counter-action">
-                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text">
-                                                       Order Now
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                    <div class="arrow-icon">
-                                                        <i class="fa-regular fa-cart-shopping"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -1815,28 +352,32 @@ grew up watching their elders stir magic into masalas, sun-dry mangoes for weeks
                                         }'>
                                             <div class="swiper-wrapper">
                                                 <!-- single swiper start -->
+                                                @foreach ($testimonials as $testimonial)
+                                                    
+                                               
                                                 <div class="swiper-slide">
                                                     <!-- single customers feedback area start -->
                                                     <div class="single-customers-feedback-area">
                                                         <div class="top-thumbnail-area">
                                                             <div class="left">
-                                                                <img src="{{asset('frontend/assets')}}/images/testimonial/01.png" alt="logo">
+                                                                <img src="{{asset("uploads/testimonial/$testimonial->profile_image")}}" alt="{{$testimonial->name}}">
                                                                 <div class="information">
                                                                     <h4 class="title">
-                                                                        Andrew D. Smith
+                                                                        {{$testimonial->name}}
                                                                     </h4>
-                                                                    <span>Manager</span>
+                                                                    <span>{{$testimonial->designation}}</span>
                                                                 </div>
                                                             </div>
                                                             
                                                         </div>
                                                         <div class="body-content">
                                                             <p class="disc">
-                                                                ““The pickles here are absolutely delicious! especially non-veg pickles. Highly recommend the chicken pickle and prawn pickle"”
+                                                                ““{{$testimonial->review}}"”
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                 @endforeach
                                             </div>
                                         </div>
                                     </div>

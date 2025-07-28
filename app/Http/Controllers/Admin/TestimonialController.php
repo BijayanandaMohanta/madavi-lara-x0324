@@ -23,10 +23,10 @@ class TestimonialController extends Controller
   {
     // dd($request);
     $data = $this->validate($request, [
-      'rating' => 'required',
+      'rating' => 'nullable',
       'name' => 'required|max:150',
       'designation' => 'required|max:120',
-      'city' => 'required|max:100',
+      'city' => 'nullable|max:100',
       'review' => 'required',
       'profile_image' => 'required|image',
     ]);
@@ -51,10 +51,10 @@ class TestimonialController extends Controller
   public function update(Request $request, $id)
   {
     $data = $this->validate($request, [
-      'rating' => 'required',
+      'rating' => 'nullable',
       'name' => 'required|max:150',
       'designation' => 'required|max:120',
-      'city' => 'required|max:100',
+      'city' => 'nullable|max:100',
       'review' => 'required',
       'profile_image' => 'nullable|image',
     ]);

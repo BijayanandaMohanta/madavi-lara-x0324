@@ -34,27 +34,23 @@
 
 
 
-    <!-- about area start -->
+     <!-- about area start -->
     <div class="rts-service-area rts-section-gap2 bg_light-1">
         <div class="container-3">
             <div class="row align-items-center">
                 <div class="col-lg-4">
                     <div class="thumbnail-left">
-                        <img src="{{asset('frontend/assets')}}/images/about/02.jpg" alt="">
+                        <img src="{{asset("uploads/$about->image")}}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-8 pl--60 pl_md--10 pt_md--30 pl_sm--10 pt_sm--30">
                     <div class="about-content-area-1">
                         <h2 class="title">
-                            A Taste of Tradition, A Spoonful of Nostalgia
+                            {{$about->title}}
                         </h2>
-                        <p class="disc">
-                            Welcome to Madavi Homemade Foods, where every jar tells a story, every bite brings back a memory, and every flavor is a tribute to the kitchens of our mothers and grandmothers. Born out of a deep-rooted passion for preserving the rich culinary traditions of Indian homes, Madavi Homemade Foods is not just a brand—it's a family movement led by homemakers who
-grew up watching their elders stir magic into masalas, sun-dry mangoes for weeks, and pour love into every pickle jar
-                        </p>
-                        <p class="disc">Our journey began with a simple intention: to bring back the soul of home-cooked food, especially the kind that made our childhood special. What started in our humble kitchens became a heartwarming venture when one of our regular customers, with teary eyes, said — “I haven’t tasted pickles like this since my granny passed away. You brought back my childhood in a spoonful.”
-</p>
-                        <h5 class="text-center disc">"That’s when we realized—we weren’t just making food. We were bottling emotions, memories, and traditions."</h5>
+                        <div>
+                            {!!$about->description!!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,29 +149,32 @@ grew up watching their elders stir magic into masalas, sun-dry mangoes for weeks
                                             }
                                         }'>
                                             <div class="swiper-wrapper">
-                                                <!-- single swiper start -->
+                                                @foreach ($testimonials as $testimonial)
+                                                    
+                                               
                                                 <div class="swiper-slide">
                                                     <!-- single customers feedback area start -->
                                                     <div class="single-customers-feedback-area">
                                                         <div class="top-thumbnail-area">
                                                             <div class="left">
-                                                                <img src="{{asset('frontend/assets')}}/images/testimonial/01.png" alt="logo">
+                                                                <img src="{{asset("uploads/testimonial/$testimonial->profile_image")}}" alt="{{$testimonial->name}}">
                                                                 <div class="information">
                                                                     <h4 class="title">
-                                                                        Andrew D. Smith
+                                                                        {{$testimonial->name}}
                                                                     </h4>
-                                                                    <span>Manager</span>
+                                                                    <span>{{$testimonial->designation}}</span>
                                                                 </div>
                                                             </div>
                                                             
                                                         </div>
                                                         <div class="body-content">
                                                             <p class="disc">
-                                                                ““The pickles here are absolutely delicious! especially non-veg pickles. Highly recommend the chicken pickle and prawn pickle"”
+                                                                ““{{$testimonial->review}}"”
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                 @endforeach
                                             </div>
                                         </div>
                                     </div>

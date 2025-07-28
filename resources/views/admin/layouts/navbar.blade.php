@@ -115,6 +115,15 @@
                             <li class="has-submenu {{ request()->is('admin/banners*') ? 'active' : '' }}">
                                 <a href="{{ route('banners.index') }}">Banners</a>
                             </li>
+                            <li class="has-submenu {{ request()->is('admin/menus*') ? 'active' : '' }}">
+                                <a href="{{ route('menus.index') }}">Menus</a>
+                            </li>
+                            <li class="has-submenu {{ request()->is('admin/about-us*') ? 'active' : '' }}">
+                                <a href="{{ route('about-us.index') }}">About Us</a>
+                            </li>
+                             <li class="has-submenu {{ request()->is('admin/ads*') ? 'active' : '' }}">
+                                <a href="{{ route('ads.index') }}">Home Ads</a>
+                            </li>
                             <li class="has-submenu {{ request()->is('admin/pages*') ? 'active' : '' }}">
                                 <a href="{{ route('pages.index') }}">Pages</a>
                             </li>

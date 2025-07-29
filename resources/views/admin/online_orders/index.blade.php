@@ -14,11 +14,11 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Offline Orders</li>
+                                <li class="breadcrumb-item active">Online Orders</li>
                             </ol>
                         </div>
                     @section('page_title')
-                        Offline Orders
+                        Online Orders
                     @endsection
                 </div>
             </div>
@@ -42,7 +42,7 @@
                             @include('flash_msg')
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="page-title">Offline Orders</h4>
+                                    <h4 class="page-title">Online Orders</h4>
                                 </div>
                                 {{-- <div class="col-md-6">
                               <a href="{{ route('tele_orders.index') }}">  <h4 class="page-title">Add Tele Order +</h4></a>
@@ -110,33 +110,12 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="control-label">Payment Option</label>
-                                            <select class="form-control @error('payment_option') is-invalid @enderror"
-                                                name="payment_option" id="payment_option" onchange="this.form.submit()">
-                                                <option value="">Payment Option</option>
-                                                <option value="UPI"
-                                                    {{ request('payment_option') == 'UPI' ? 'selected' : '' }}>UPI
-                                                </option>
-                                                <option value="Card"
-                                                    {{ request('payment_option') == 'Card' ? 'selected' : '' }}>Card
-                                                </option>
-                                                <option value="Cash"
-                                                    {{ request('payment_option') == 'Cash' ? 'selected' : '' }}>Cash
-                                                </option>
-                                                <option value="Pay Online"
-                                                    {{ request('payment_option') == 'Pay Online' ? 'selected' : '' }}>
-                                                    Pay Online</option>
 
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="col-md-3">
                                         <div class="">
                                             <label class="control-label">Customer Name/Phone/Email</label>
                                             <input type="text" class="form-control"
-                                                placeholder="Customer Name/Phone/Email" name="customer_search"
+                                                placeholder="Customer Mobile" name="customer_search"
                                                 value="{{ request('customer_search') }}">
                                         </div>
                                     </div>
@@ -180,15 +159,13 @@
                                             <th>S.No</th>
                                             <th>Order Id</th>
                                             <th>Customer Details</th>
-                                            <th>Order Date</th>
+                                            <th>Product Name</th>
                                             <th>Order Value</th>
-                                            <th>Payment Option</th>
                                             <th>Order Status</th>
                                             <th>Update Status</th>
-                                            {{-- <th>Create shipment</th> --}}
                                             <th>Payment Status</th>
-                                            <th>Action</th>
-
+                                            <th>Update Payment Status</th>
+                                            <th>Order At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -198,28 +175,19 @@
                                                 </td>
 
                                                 <td>{{ $data->order_id }} <br>
-                                                    @if ($data->order_from)
-                                                        <span class="badge badge-success">
-                                                            Offline Order
-                                                        </span>
-                                                    @else
-                                                        <span class="badge badge-warning">
-                                                            Online Order
-                                                        </span>
-                                                    @endif
+
+                                                    <span class="badge badge-warning">
+                                                        Online Order
+                                                    </span>
 
                                                 </td>
 
-                                                <td>{{ $data->customer_name }}<br>{{ $data->customer_phone }}</td>
-
-
-                                                <td>
-                                                    {{ $data->date }}
-                                                </td>
-                                                <td>{{ round($data->grand_total - $data->coupon - $data->shipping_charges) }}
+                                                <td>{{ $data->name }}<br>{{ $data->mobile }}</td>
+                                                <td> <span
+                                                        class="badge badge-warning">{{ $data->category }}</span><br>{{ $data->product }}
                                                 </td>
 
-                                                <td>{{ $data->payment_option }}</td>
+                                                <td>{{ $data->amount }}</td>
                                                 <td>
                                                     @if (
                                                         $data->order_status == 'Delivered' ||
@@ -239,12 +207,11 @@
                                                     @endif
 
                                                 </td>
-
                                                 <td>
                                                     @if ($data->order_status != 'Cancelled' && $data->order_status != 'Delivered' && $data->order_status != 'Store Pickuped')
                                                         <select class="form-control" name="order_status"
                                                             id="order_status" style="width: 120px;"
-                                                            onchange="changeOrderStatus(this.value,{{ $data->sid }})">
+                                                            onchange="changeOrderStatus(this.value,{{ $data->id }})">
                                                             >
 
                                                             <option value="">Choose Status</option>
@@ -294,17 +261,6 @@
                                                         </select>
                                                     @endif
                                                 </td>
-
-
-
-                                                {{-- <td>
-                                                    @if ($data->order_from != 'Tele Order' && $data->order_status != 'Cancelled' && $data->order_status != 'Delivered' && $data->order_status != 'Store Pickuped' && $data->order_status != 'Blocked')
-                                                        @if ($data->shiprocket_order_id == '')
-                                                            <a href="{{ route('shipment', [$data->sid ?? 'N/A']) }}"
-                                                                class="btn btn-sm btn-success">Create Shipment</a>
-                                                        @endif
-                                                    @endif
-                                                </td> --}}
                                                 <td>
                                                     @if ($data->payment_status == 'Paid')
                                                         <span class="badge badge-success">{{ 'Paid' }}</span>
@@ -313,26 +269,28 @@
                                                         <span
                                                             class="badge badge-danger">{{ $data->payment_status }}</span>
                                                     @endif
-
                                                 </td>
-
                                                 <td>
-                                                    <a href="{{ route('orders.edit', [$data->sid ?? 'N/A']) }}"
-                                                        class="btn btn-info waves-effect waves-light btn-xs"><i
-                                                            class="fas fa-eye"></i></a>
+                                                    @if (($data->order_status != 'Cancelled' && $data->order_status != 'Delivered' && $data->order_status != 'Store Pickuped') ||  $data->payment_status != 'Paid')
+                                                        <select class="form-control" name="payment_status"
+                                                            id="payment_status" style="width: 120px;"
+                                                            onchange="changePaymentStatus(this.value,{{ $data->id }})">
+                                                            >
 
+                                                            <option value="">Choose Status</option>
+                                                            <option value="Paid"
+                                                                {{ ($data->payment_status ?? '') == 'Paid' ? 'selected' : '' }}>
+                                                                Paid
+                                                            </option>
+                                                            <option value="Unpaid"
+                                                                {{ ($data->payment_status ?? '') == 'Unpaid' ? 'selected' : '' }}>
+                                                                Unpaid
+                                                            </option>
 
-                                                    {{-- <a target="_blank"
-                                                        href="{{ route('invoice', $data->sid ?? 'N/A') }}"
-                                                        class="btn btn-dark waves-effect waves-light btn-xs mt-1"><i
-                                                            class="fas fa-print"></i></a> --}}
-                                                    {{--                                                             
-                                                            <a href="{{ route('invoice-generate', [$data->sid ?? 'N/A']) }}"
-                                                                class="btn btn-danger waves-effect waves-light btn-xs"><i
-                                                                    class="fas fa-download"></i></a> --}}
-
+                                                        </select>
+                                                    @endif
                                                 </td>
-
+                                                <td>{{ $data->created_at }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -374,32 +332,40 @@
     <script src="{{ asset('admin_assets') . '/js/pages/datatables.init.js' }}"></script>
     <script src="{{ asset('admin_assets') . '/js/pages/sweet-alerts.init.js' }}"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <script language="javascript">
         $('#example').DataTable({
             responsive: true
         });
     </script>
-    <script language="javascript">
-        $(document).ready(function() {
-            $('.select2').select2({
-                placeholder: "Select Product",
-                allowClear: true
-            });
-        });
-    </script>
     <script>
-        function changeOrderStatus(order_status, sid) {
-            const url = "{{ route('orders_update_ajax') }}";
+        function changeOrderStatus(order_status, id) {
+            const url = "{{ route('online_orders_update_ajax') }}";
             $.ajax({
                 type: "POST",
                 url: url,
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "order_status": order_status,
-                    "sid": sid
+                    "id": id
+                },
+                success: function(data) {
+                    if (data.status == 'success') {
+                        location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+        }
+        function changePaymentStatus(payment_status, id) {
+            const url = "{{ route('online_payment_update_ajax') }}";
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "payment_status": payment_status,
+                    "id": id
                 },
                 success: function(data) {
                     if (data.status == 'success') {
@@ -411,14 +377,4 @@
             });
         }
     </script>
-    <style>
-        .select2-container .select2-selection--single {
-            height: 2.2rem !important;
-            padding-top: .2rem;
-        }
-
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            top: .2rem;
-        }
-    </style>
 @endsection

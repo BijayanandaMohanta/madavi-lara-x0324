@@ -24,6 +24,9 @@ Route::get("/menu", [HomeController::class, "menu"])->name("menu");
 Route::get("/contact", [HomeController::class, "contact"])->name("contact");
 Route::any("/invoice/{sid}", [CartController::class, "invoice"])->name("invoice");
 Route::post("/contact/save", [HomeController::class, "contact_save"])->name("contact_save");
+Route::post("/place-order",[HomeController::class, "place_order"])->name("place_order");
+Route::post("/online_orders_update_ajax",[HomeController::class, "online_orders_update_ajax"])->name("online_orders_update_ajax");
+Route::post("/online_payment_update_ajax",[HomeController::class, "online_payment_update_ajax"])->name("online_payment_update_ajax");
 
 //Backend routes/Admin routes
 Auth::routes();
@@ -98,6 +101,7 @@ Route::group(['middleware' => ['isAdmin', 'auth']], function () {
     Route::any('admin/product_image_priority', '\App\Http\Controllers\Admin\ProductImageController@product_image_priority')->name('product_image_priority');
 
     Route::resource('admin/orders', '\App\Http\Controllers\Admin\OrdersController');
+    Route::resource('admin/online-orders', '\App\Http\Controllers\Admin\OnlineOrderController');
     // update with ajax
     Route::post('admin/orders_update_ajax', '\App\Http\Controllers\Admin\OrdersController@orders_update_ajax')->name('orders_update_ajax');
     Route::get('admin/place-orders', '\App\Http\Controllers\Admin\OrdersController@place_orders')->name('place_orders');

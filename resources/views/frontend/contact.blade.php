@@ -191,10 +191,23 @@
             </div>
         </div>
     </div>
-    @include('frontend.layouts.toast')
+    {{-- @include('frontend.layouts.toast') --}}
+    <style>
+        .swal2-container>* {
+            font-size: 1.35rem;
+        }
+
+    </style>
     @if (Session::has('success'))
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-             showCustomToast('<strong>Success!</strong><brYour message has been sent successfully.!', 'success');
+            Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Your message has been sent successfully.!',
+                        confirmButtonColor: '#3085d6'
+                    });
+             //showCustomToast('<strong>Success!</strong><brYour message has been sent successfully.!', 'success');
         </script>
     @endif
 @endsection

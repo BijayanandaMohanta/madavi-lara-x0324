@@ -71,40 +71,5 @@ if (file_exists($routesPath)) {
             </div>
         </div>
 
-        <div class="col-md-12 col-lg-6">
-            <h4>Recent Orders</h4>
-
-            <div class="card pb-2">
-                <table class="table table-responsive w-100">
-                    <tr>
-                        <td>Sl no</td>
-                        <td>Order Id</td>
-                        <td>Date</td>
-                        <td>Grand Total</td>
-                        <td>Order Status</td>
-                        <td>Payment Status</td>
-                        <td>Action</td>
-
-                    </tr>
-                    @foreach ($recentOrders as $order)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $order->order_id }}</td>
-                            <td>{{ $order->date }}</td>
-                            <td>{{ $order->grand_total }}</td>
-                            <td>{{ $order->order_status }}</td>
-                            <td>{{ $order->payment_status }}({{ $order->payment_option }})</td>
-                            <td><a href="{{ route('orders.edit', [$order->sid ?? 'N/A']) }}">
-                                    <div class="btn btn-sm btn-primary">View Order</div>
-                                </a></td>
-                        </tr>
-                    @endforeach
-                </table>
-                <div class="text-center">
-                    <a href="{{ route('orders.index') }}" class="btn btn-primary">View all orders</a>
-                </div>
-            </div>
-        </div>
-
     </div>
 @endsection

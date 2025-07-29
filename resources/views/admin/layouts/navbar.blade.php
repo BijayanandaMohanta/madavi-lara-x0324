@@ -139,8 +139,10 @@
                         </a>
                         <ul class="submenu">
                             
+                            <li class="{{ request()->is('online-orders*') ? 'active' : '' }}"><a
+                                    href="{{ route('online-orders.index') }}">Online Orders</a></li>
                             <li class="{{ request()->is('orders*') ? 'active' : '' }}"><a
-                                    href="{{ route('orders.index') }}">Manage Orders</a></li>
+                                    href="{{ route('orders.index') }}">Offline Orders</a></li>
                             <li class="{{ request()->is('tele_orders*') ? 'active' : '' }}"><a
                                     href="{{ route('tele_orders.index') }}">Offline Billing</a></li>
                            

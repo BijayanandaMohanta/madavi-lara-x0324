@@ -23,6 +23,7 @@ Route::get("/product/{slug}", [HomeController::class, "product"])->name("product
 Route::get("/menu", [HomeController::class, "menu"])->name("menu");
 Route::get("/contact", [HomeController::class, "contact"])->name("contact");
 Route::any("/invoice/{sid}", [CartController::class, "invoice"])->name("invoice");
+Route::post("/contact/save", [HomeController::class, "contact_save"])->name("contact_save");
 
 //Backend routes/Admin routes
 Auth::routes();

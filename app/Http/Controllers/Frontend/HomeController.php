@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\Cart;
 use App\Models\CartAddress;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
@@ -49,13 +50,28 @@ class HomeController extends Controller
         return view('frontend.products',compact('products'));
     }
     public function product($slug = null){
-        return view('frontend.product-detail');
+        if(!$slug) return redirect()->back();
+        $product = Product::where('slug',$slug)->first();
+        if(!$product) return redirect()->back();
+        $similarproducts = $product->category->products()->where('id','!=',$product->id)->get();
+        
+        return view('frontend.product-detail',compact('product','similarproducts'));
     }
     public function menu(){
         $menus = Menu::all();
         return view('frontend.menu',compact('menus'));
     }
     public function contact(){
-        return view('frontend.contact');
+        $categories = Category::all();
+        return view('frontend.contact',compact('categories'));
+    }
+    public function contact_save(Request $request){
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->category = $request->category;
+        $contact->message = $request->message;
+        $contact->save();
+        return redirect()->back()->with('success','Your message has been sent successfully.');
     }
 }

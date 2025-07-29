@@ -88,6 +88,18 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="below_description">Below Description * :</label>
+                                        <textarea class="form-control sun-editor @error('below_description') is-invalid @enderror" name="below_description"
+                                            id="below_description" rows="5" autocomplete="off">{{ $data->below_description }}</textarea>
+                                        @error('below_description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 {{-- specification need text editor --}}
                                 <div class="col-md-6">

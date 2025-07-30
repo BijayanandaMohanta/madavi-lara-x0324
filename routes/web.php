@@ -24,12 +24,18 @@ Route::get("/menu", [HomeController::class, "menu"])->name("menu");
 Route::get("/contact", [HomeController::class, "contact"])->name("contact");
 Route::any("/invoice/{sid}", [CartController::class, "invoice"])->name("invoice");
 Route::post("/contact/save", [HomeController::class, "contact_save"])->name("contact_save");
-Route::post("/place-order",[HomeController::class, "place_order"])->name("place_order");
-Route::post("/online_orders_update_ajax",[HomeController::class, "online_orders_update_ajax"])->name("online_orders_update_ajax");
-Route::post("/online_payment_update_ajax",[HomeController::class, "online_payment_update_ajax"])->name("online_payment_update_ajax");
+Route::post("/place-order", [HomeController::class, "place_order"])->name("place_order");
+Route::get("/terms-and-condition", [HomeController::class, "terms_and_condition"])->name("terms-and-condition");
+Route::get("/privacy-policy", [HomeController::class, "privacy_policy"])->name("privacy-policy");
+Route::get("/return-and-refund-policy", [HomeController::class, "return_and_refund_policy"])->name("return-and-refund-policy");
+Route::get("/disclaimer", [HomeController::class, "disclaimer"])->name("disclaimer");
 
+Route::post("/online_orders_update_ajax", [HomeController::class, "online_orders_update_ajax"])->name("online_orders_update_ajax");
+Route::post("/online_payment_update_ajax", [HomeController::class, "online_payment_update_ajax"])->name("online_payment_update_ajax");
+Route::post("/change_current_status_ajax", [HomeController::class, "change_current_status_ajax"])->name("change_current_status_ajax");
 //Backend routes/Admin routes
 Auth::routes();
+
 
 Route::group(['middleware' => ['isAdmin', 'auth']], function () {
     Route::get('admin', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin');
@@ -130,7 +136,7 @@ Route::group(['middleware' => ['isAdmin', 'auth']], function () {
     Route::any('admin/registeredsellers', '\App\Http\Controllers\Admin\SellerController@registeredsellers')->name('registeredsellers');
     Route::any('admin/deleteregisteredsellers/{id}', '\App\Http\Controllers\Admin\SellerController@deleteregisteredsellers')->name('deleteregisteredsellers');
     Route::any('admin/update_seller_status', '\App\Http\Controllers\Admin\SellerController@update_seller_status')->name('update_seller_status');
-    
+
     Route::resource('admin/roles', '\App\Http\Controllers\Admin\RoleController');
     Route::any('admin/report/orders_report', '\App\Http\Controllers\Admin\ReportController@orders_report')->name('order_report');
     Route::any('admin/report/stocks_report', '\App\Http\Controllers\Admin\ReportController@stocks_report')->name('stocks_report');
@@ -167,7 +173,7 @@ Route::group(['middleware' => ['isAdmin', 'auth']], function () {
     Route::post('/export-orders', '\App\Http\Controllers\Admin\ReportController@exportOrders')->name('export.orders');
 
     Route::post('/update_order_sl_no', [\App\Http\Controllers\Admin\OrdersController::class, 'update_order_sl_no'])
-    ->name('update_order_sl_no');
+        ->name('update_order_sl_no');
 
     // Export cart
     Route::any('admin/export_all_pending_cart', '\App\Http\Controllers\Admin\ReportController@export_all_pending_cart')->name('export_all_pending_cart');
@@ -186,4 +192,4 @@ Route::get('/download-all-invoice-report', [\App\Http\Controllers\Admin\ReportCo
 
 
 // Developer Route for Testing
-Route::get('/devtest', [\App\Http\Controllers\Frontend\TestingController::class,'index'])->name('devtest');
+Route::get('/devtest', [\App\Http\Controllers\Frontend\TestingController::class, 'index'])->name('devtest');

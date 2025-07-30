@@ -35,11 +35,12 @@
                                 <h4 class="page-title">Products</h4>
                                 <div class="float-right">
                                     <a href="{{ route('product.create') }}">
-                                        <button class="btn btn-success btn-sm float-right ml-2"><i class="fas fa-plus"></i>
+                                        <button class="btn btn-success btn-sm float-right ml-2"><i
+                                                class="fas fa-plus"></i>
                                             Add Product
                                         </button>
                                     </a>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -57,8 +58,7 @@
                                         Descending
                                     </option>
                                 </select> --}}
-                                <button type="submit"
-                                    class="btn btn-success ml-1">Search</button>
+                                <button type="submit" class="btn btn-success ml-1">Search</button>
                             </div>
                         </form>
                         <div class="table-responsive mt-2">
@@ -72,6 +72,7 @@
                                         {{-- <th>Modified At</th> --}}
                                         <th>Manage Image</th>
                                         <th>Manage Prices</th>
+                                        <th>In Stock / Sale</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -86,25 +87,41 @@
                                                 <span class="badge badge-primary">{{ $data->category->category }}</span>
                                             </td>
                                             <td>{{ $data->name }}</td>
-                                           
+
                                             {{-- <td> <span class="badge badge-success">{{ \Carbon\Carbon::parse($data->updated_at)->format('d M Y h:i A') }}</span>
                                             </td> --}}
                                             <td>
                                                 <a href="{{ route('product_image.edit', [$data->id]) }}"
                                                     class="btn btn-info waves-effect waves-light btn-xs">
-                                                    Upload Image 
+                                                    Upload Image
                                                 </a>
 
                                             </td>
-                                           <td>
-                                                  
-                                                        <a href="{{ route("product-price.index", ['id'=>$data->id]) }}"
-                                                            class="btn btn-primary waves-effect waves-light btn-xs mb-1">
-                                                            Product Prices
-                                                        </a>
-                                                  
-                                                </td>
-                                             <td>
+                                            <td>
+
+                                                <a href="{{ route('product-price.index', ['id' => $data->id]) }}"
+                                                    class="btn btn-primary waves-effect waves-light btn-xs mb-1">
+                                                    Product Prices
+                                                </a>
+
+                                            </td>
+                                            <td>
+                                                <select class="form-control" name="current_status" id="current_status"
+                                                    style="width: 120px;"
+                                                    onchange="changeCurrentStatus(this.value,{{ $data->id }})">
+                                                    >
+                                                    <option value="">Choose Status</option>
+                                                    <option value="In Stock"
+                                                        {{ ($data->current_status ?? '') == 'In Stock' ? 'selected' : '' }}>
+                                                        In Stock
+                                                    </option>
+                                                    <option value="On Sale"
+                                                        {{ ($data->current_status ?? '') == 'On Sale' ? 'selected' : '' }}>
+                                                        On Sale
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td>
                                                 @if ($data->status == '1')
                                                     <span class="badge badge-success">{{ 'Active' }}</span>
                                                 @endif
@@ -177,6 +194,26 @@
     });
 </script>
 <script>
+    function changeCurrentStatus(current_status, id) {
+        const url = "{{ route('change_current_status_ajax') }}";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "current_status": current_status,
+                "id": id
+            },
+            success: function(data) {
+                if (data.status == 'success') {
+                    location.reload();
+                } else {
+                    alert(data.message);
+                }
+            }
+        });
+    }
+
     function showNotification(message, type) {
         // Create a notification element
         var notification = $('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
@@ -202,140 +239,5 @@
             notification.alert('close');
         }, 5000);
     }
-</script>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalImport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form action="{{ route('product_data_update') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="file">Excel File:</label>
-                        <input type="file" class="form-control" id="file" name="file" required
-                            accept=".xlsx">
-                    </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Import</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="stockUpdateModal" tabindex="-1" aria-labelledby="stockUpdateModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fs-5" id="stockUpdateModalLabel">Stock Update</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="post">
-                    @csrf
-                    <p id="product_name"></p>
-                    <input type="hidden" name="product_id" id="product_id">
-                    <input type="text" name="stock" id="stock" class="form-control mb-2"
-                        placeholder="Enter Stock" oninput="validateStockInput(this)" required>
-                    <button type="button" name="add-stock" class="btn btn-primary">Add Stock</button>
-                    <button type="button" name="remove-stock" class="btn btn-danger">Remove Stock</button>
-                    <a href="" id="edit_route"
-                        class="btn btn-success">
-                        Stock Transactions</a>
-                    <br>
-                    <div id="success-message" class="mt-2 alert alert-success" style="display: none;"></div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    function validateStockInput(input) {
-        // Remove any non-numeric characters (e.g., letters, symbols)
-        input.value = input.value.replace(/[^0-9]/g, '');
-
-        // Convert the value to a number
-        let value = parseInt(input.value);
-
-        // If the value is 0, negative, or NaN (not a number), clear the input
-        if (isNaN(value) || value <= 0) {
-            input.value = '';
-        }
-    }
-</script>
-
-<script>
-    // Function to open the modal and set the product ID
-    $(document).on('click', '.open-stock-update-modal', function() {
-        var productId = $(this).data('id');
-        var productName = $(this).data('name');
-        var edit_route = 'https://openboxwale.in/admin/product_stock/'+productId+'/edit';
-        $('#product_id').val(productId);
-        $('#product_name').html("Product : " + productName);
-        $('#edit_route').attr("href",edit_route);
-        $('#stockUpdateModal').modal('show');
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('button[name="add-stock"], button[name="remove-stock"]').click(function() {
-            var button = $(this);
-            var action = button.attr('name') === 'add-stock' ? 'Credit' : 'Debit';
-            var product_id = $('#product_id').val();
-            var stock = $('#stock').val();
-            var from = "AJAX";
-            var message = $('#success-message');
-            message.hide();
-
-            // Disable inputs and show processing message
-            button.prop('disabled', true).text('Processing...');
-            $('#product_id, #stock').prop('disabled', true);
-
-            $.ajax({
-                url: '{{ route('product_stock.store') }}',
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    product_id: product_id,
-                    stock: stock,
-                    type: action,
-                    from: from
-                },
-                success: function(response) {
-                    // Enable inputs and revert button text
-                    button.prop('disabled', false).text(action === 'Credit' ? 'Add Stock' :
-                        'Remove Stock');
-                    $('#product_' + product_id).text(response.product_stock);
-                    $('#product_id, #stock').prop('disabled', false);
-
-                    // Clear input fields
-                    // $('#product_id').val('');
-                    $('#stock').val('');
-
-                    message.text(response.success).show();
-                },
-                error: function(xhr) {
-                    // Enable inputs and revert button text
-                    button.prop('disabled', false).text(action === 'Credit' ? 'Add Stock' :
-                        'Remove Stock');
-                    $('#product_id, #stock').prop('disabled', false);
-
-                    message.text(response.error).show();
-                }
-            });
-        });
-    });
 </script>
 @endsection

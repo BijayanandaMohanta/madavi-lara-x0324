@@ -330,7 +330,8 @@
                                     <select name="price_id">
                                         <option data-display="Select Quantity*">Select Quantity</option>
                                         @foreach ($product->prices as $price)
-                                            <option value="{{ $price->id }}">{{ $price->quantity }}</option>
+                                            <option value="{{ $price->id }}" data-value="{{ $price->quantity }}">
+                                                {{ $price->quantity }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -353,6 +354,27 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        function getWhatsappMessage(form) {
+            const name = form.querySelector('input[name="name"]').value.trim();
+            const email = form.querySelector('input[name="email"]').value.trim();
+            const category = form.querySelector('input[name="category"]').value.trim();
+            const product = form.querySelector('input[name="product"]').value.trim();
+            const priceSelect = form.querySelector('select[name="price_id"]');
+            const selectedOption = priceSelect.options[priceSelect.selectedIndex];
+            const quantity = selectedOption ? selectedOption.getAttribute('data-value') || '' : '';
+            const message = form.querySelector('textarea[name="message"]').value.trim();
+
+            return (
+                `Order Details:\n` +
+                `*Name*: ${name}\n` +
+                `*Email*: ${email}\n` +
+                `*Category*: ${category}\n` +
+                `*Product*: ${product}\n` +
+                `*Quantity*: ${quantity}\n` +
+                `*Message*: ${message}`
+            );
+        }
+
         function placeOrder(event) {
             event.preventDefault(); // Prevent default form submission
 
@@ -362,13 +384,16 @@
 
             axios.post("{{ route('place_order') }}", formData)
                 .then(function(response) {
+                    const whatsappMessage = getWhatsappMessage(form);
+                    const whatsappUrl = "https://wa.me/+919701416696?text=" + encodeURIComponent(whatsappMessage);
+                    window.open(whatsappUrl, '_blank');
                     form.reset();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Order Placed',
-                        text: 'Your order has been placed successfully!',
-                        confirmButtonColor: '#3085d6'
-                    });
+                    // Swal.fire({
+                    //     icon: 'success',
+                    //     title: 'Order Placed',
+                    //     text: 'Your order has been placed successfully!',
+                    //     confirmButtonColor: '#3085d6'
+                    // });
                 })
                 .catch(function(error) {
                     if (error.response && error.response.data) {

@@ -28,7 +28,7 @@ class ProductController extends Controller
 {
     // Start with the query to select products
     $products = Product::select([
-        'id','sl_no', 'name','slug', 'status', 'category_id'
+        'id','sl_no', 'name','slug', 'status', 'category_id','current_status'
     ]);
 
     // Apply the search filter if the 'name' query parameter exists

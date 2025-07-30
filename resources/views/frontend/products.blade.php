@@ -25,47 +25,16 @@
                             <div class="filterbox-body">
                                 <div class="category-wrapper ">
                                     <!-- single category -->
-                                    <div class="single-category">
-                                        <input id="cat1" type="checkbox">
-                                        <label for="cat1">Veg Pickles
-                                        </label>
-                                    </div>
+                                    @foreach ($categories as $category)
+                                        <div class="single-category">
+                                            <input id="cat{{ $category->id }}" type="checkbox"
+                                                {{ $category->id == $select_category ? 'checked' : '' }}>
+                                            <label for="cat{{ $category->id }}">{{ $category->category }}
+                                            </label>
+                                        </div>
+                                    @endforeach
                                     <!-- single category end -->
-                                    <!-- single category -->
-                                    <div class="single-category">
-                                        <input id="cat2" type="checkbox">
-                                        <label for="cat2">Non-Veg Pickles
 
-                                        </label>
-                                    </div>
-                                    <!-- single category end -->
-                                    <!-- single category -->
-                                    <div class="single-category">
-                                        <input id="cat3" type="checkbox">
-                                        <label for="cat3">Powders
-                                        </label>
-                                    </div>
-                                    <!-- single category end -->
-                                    <!-- single category -->
-                                    <div class="single-category">
-                                        <input id="cat4" type="checkbox">
-                                        <label for="cat4">Sweets
-                                        </label>
-                                    </div>
-                                    <!-- single category end -->
-                                    <!-- single category -->
-                                    <div class="single-category">
-                                        <input id="cat7" type="checkbox">
-                                        <label for="cat7">Snacks
-                                        </label>
-                                    </div>
-                                    <!-- single category end -->
-                                    <!-- single category -->
-                                    <div class="single-category">
-                                        <input id="cat6" type="checkbox">
-                                        <label for="cat6">Ghee
-                                        </label>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -73,22 +42,51 @@
                             <h5 class="title">Product Status</h5>
                             <div class="filterbox-body">
                                 <div class="category-wrapper">
-                                    <!-- single category -->
                                     <div class="single-category">
-                                        <input id="cat11" type="checkbox">
-                                        <label for="cat11">In Stock
-
-                                        </label>
+                                        <input id="cat11" type="checkbox" value="In Stock">
+                                        <label for="cat11">In Stock</label>
                                     </div>
-                                    <!-- single category end -->
-                                    <!-- single category -->
                                     <div class="single-category">
-                                        <input id="cat12" type="checkbox">
-                                        <label for="cat12">On Sale
-
-                                        </label>
+                                        <input id="cat12" type="checkbox" value="On Sale">
+                                        <label for="cat12">On Sale</label>
                                     </div>
-                                    <!-- single category end -->
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            const checkboxes = document.querySelectorAll('.single-category input[type="checkbox"]');
+
+                                            function updateUrlParam() {
+                                                // Use only checked checkboxes with valid value (ignore ones with just 'on')
+                                                const selected = Array.from(checkboxes)
+                                                    .filter(cb => cb.checked && cb.value && cb.value !== 'on')
+                                                    .map(cb => cb.value.trim());
+
+                                                const url = new URL(window.location);
+                                                if (selected.length > 0) {
+                                                    url.searchParams.set('status', selected.join(', '));
+                                                } else {
+                                                    url.searchParams.delete('status');
+                                                }
+
+                                                if (url.toString() !== window.location.toString()) {
+                                                    window.location.href = url.toString();
+                                                }
+                                            }
+
+                                            checkboxes.forEach(cb => {
+                                                cb.addEventListener('change', updateUrlParam);
+                                            });
+
+                                            // On page load, set checkboxes based on 'status' param
+                                            const params = new URLSearchParams(window.location.search);
+                                            const statusParam = params.get('status');
+                                            if (statusParam) {
+                                                const values = statusParam.split(',').map(s => s.trim());
+                                                checkboxes.forEach(cb => {
+                                                    cb.checked = values.includes(cb.value);
+                                                });
+                                            }
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +111,8 @@
                                         <a href="{{ route('product', $product->slug) }}">
                                             <h4 class="title">{{ $product->name }}</h4>
                                         </a>
-                                        <p class="mb--10">{{ \Illuminate\Support\Str::words($product->description, 8) }}</p>
+                                        <p class="mb--10">{{ \Illuminate\Support\Str::words($product->description, 8) }}
+                                        </p>
 
                                         <span class="price">Availble Quantity :</span>
                                         <div class="price-tag">
@@ -122,8 +121,10 @@
                                                     $btn_color = ['warning', 'danger', 'light', 'dark'];
                                                 @endphp
                                                 @foreach ($product->prices as $price)
-                                                    <li class="btn-{{ $btn_color[$loop->index] }}">{{ $price->quantity }} -
-                                                        <span class="current">₹{{ $price->amount }}/-</span></li>
+                                                    <li class="btn-{{ $btn_color[$loop->index] }}">{{ $price->quantity }}
+                                                        -
+                                                        <span class="current">₹{{ $price->amount }}/-</span>
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                         </div>

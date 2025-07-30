@@ -33,9 +33,9 @@
                             </div>
                             <div class="information">
                                 <h3 class="title">Madavi Homemade Foods</h3>
-                                <p>Mehedipatnam, Hyderabad</p>
-                                <a href="#" class="number">+91 9701416696</a>
-                                <a href="#" class="email">saikishore227@gmail.com</a>
+                                <p>{{ $setting->address }}</p>
+                                <a href="tel:{{ $setting->mobile_number }}" class="number">{{ $setting->mobile_number }}</a>
+                                <a href="mailto:{{ $setting->email }}" class="email">{{ $setting->email }}</a>
                             </div>
                         </div>
 
@@ -196,18 +196,17 @@
         .swal2-container>* {
             font-size: 1.35rem;
         }
-
     </style>
     @if (Session::has('success'))
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Your message has been sent successfully.!',
-                        confirmButtonColor: '#3085d6'
-                    });
-             //showCustomToast('<strong>Success!</strong><brYour message has been sent successfully.!', 'success');
+                icon: 'success',
+                title: 'Success',
+                text: 'Your message has been sent successfully.!',
+                confirmButtonColor: '#3085d6'
+            });
+            //showCustomToast('<strong>Success!</strong><brYour message has been sent successfully.!', 'success');
         </script>
     @endif
 @endsection
@@ -218,10 +217,20 @@
         $(function() {
             $('form').validate({
                 rules: {
-                    name: { required: true, minlength: 5 },
-                    email: { required: true, email: true },
-                    category: { required: true },
-                    message: { required: true }
+                    name: {
+                        required: true,
+                        minlength: 5
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    category: {
+                        required: true
+                    },
+                    message: {
+                        required: true
+                    }
                 },
                 messages: {
                     name: {
@@ -232,12 +241,14 @@
                         required: "Email is required.",
                         email: "Please enter a valid email."
                     },
-                    category: { required: "Category is required." },
-                    message: { required: "Message is required." }
+                    category: {
+                        required: "Category is required."
+                    },
+                    message: {
+                        required: "Message is required."
+                    }
                 }
             });
         });
     </script>
 @endsection
-
-

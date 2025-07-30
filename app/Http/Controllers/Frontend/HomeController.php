@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\OnlineOrder;
 use App\Models\Order;
+use App\Models\Pages;
 use App\Models\Price;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -28,57 +29,94 @@ use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $banners = Banner::all();
         $categories = Category::all();
         $about = AboutUs::find(1);
-        $ads = Ad::where('status',1)->get();
+        $ads = Ad::where('status', 1)->get();
         $testimonials = Testimonial::all();
-        return view('frontend.index',compact('banners','categories','about','ads','testimonials'));
+        return view('frontend.index', compact('banners', 'categories', 'about', 'ads', 'testimonials'));
     }
-    public function about(){
+    public function about()
+    {
         $about = AboutUs::find(1);
         $testimonials = Testimonial::all();
-        return view('frontend.about',compact('about','testimonials'));
+        return view('frontend.about', compact('about', 'testimonials'));
     }
-    public function products($slug = null){
-        if($slug)
-        {
-            $category = Category::where('slug',$slug)->first();
-            $products = $category->products()->get();
+    public function products($slug = null, Request $request)
+    {
+        // Get selected statuses from query param 'status' as comma-separated string, trim spaces
+        $statusFilter = $request->query('status');
+        $statuses = [];
+
+        if ($statusFilter) {
+            // Remove any leading spaces and split by comma, then trim each status
+            $statuses = array_map('trim', explode(',', $statusFilter));
         }
-        else{
-            $products = Product::where('status',1)->get();
+
+        if ($slug) {
+            $category = Category::where('slug', $slug)->firstOrFail();
+
+            $productsQuery = $category->products();
+
+            // If there are statuses to filter by, apply whereIn
+            if (!empty($statuses)) {
+                $productsQuery->whereIn('current_status', $statuses);
+            }
+
+            $products = $productsQuery->get();
+        } else {
+            $productsQuery = Product::where('status', 1);
+
+            if (!empty($statuses)) {
+                $productsQuery->whereIn('current_status', $statuses);
+            }
+
+            $products = $productsQuery->get();
+            $category = null;
         }
-        return view('frontend.products',compact('products'));
-    }
-    public function product($slug = null){
-        if(!$slug) return redirect()->back();
-        $product = Product::where('slug',$slug)->first();
-        if(!$product) return redirect()->back();
-        $similarproducts = $product->category->products()->where('id','!=',$product->id)->get();
-        
-        return view('frontend.product-detail',compact('product','similarproducts'));
-    }
-    public function menu(){
-        $menus = Menu::all();
-        return view('frontend.menu',compact('menus'));
-    }
-    public function contact(){
+
         $categories = Category::all();
-        $setting = Setting::all();
-        return view('frontend.contact',compact('categories','setting'));
+        $select_category = $category->id ?? null;
+
+        return view('frontend.products', compact('products', 'categories', 'select_category'));
     }
-    public function contact_save(Request $request){
+
+    public function product($slug = null)
+    {
+        if (!$slug)
+            return redirect()->back();
+        $product = Product::where('slug', $slug)->first();
+        if (!$product)
+            return redirect()->back();
+        $similarproducts = $product->category->products()->where('id', '!=', $product->id)->get();
+
+        return view('frontend.product-detail', compact('product', 'similarproducts'));
+    }
+    public function menu()
+    {
+        $menus = Menu::all();
+        return view('frontend.menu', compact('menus'));
+    }
+    public function contact()
+    {
+        $categories = Category::all();
+        $setting = Setting::find(1);
+        return view('frontend.contact', compact('categories', 'setting'));
+    }
+    public function contact_save(Request $request)
+    {
         $contact = new Contact();
         $contact->name = $request->name;
         $contact->email = $request->email;
         $contact->category = $request->category;
         $contact->message = $request->message;
         $contact->save();
-        return redirect()->back()->with('success','Your message has been sent successfully.');
+        return redirect()->back()->with('success', 'Your message has been sent successfully.');
     }
-    public function place_order(Request $request){
+    public function place_order(Request $request)
+    {
         $data = $this->validate($request, [
             'category_id' => 'required',
             'product_id' => 'required',
@@ -92,7 +130,7 @@ class HomeController extends Controller
         ]);
         $online_order = new OnlineOrder();
         $price = Price::find($request->price_id);
-        $online_order->order_id = rand(1000000000,9999999999);
+        $online_order->order_id = rand(1000000000, 9999999999);
         $online_order->category_id = $request->category_id;
         $online_order->product_id = $request->product_id;
         $online_order->name = $request->name;
@@ -112,7 +150,8 @@ class HomeController extends Controller
             'message' => 'Order placed successfully.',
         ]);
     }
-    public function online_orders_update_ajax(Request $request){
+    public function online_orders_update_ajax(Request $request)
+    {
         $status = $request->order_status;
         $id = $request->id;
 
@@ -123,12 +162,45 @@ class HomeController extends Controller
             'status' => 'success'
         ]);
     }
-    public function online_payment_update_ajax(Request $request){
+    public function online_payment_update_ajax(Request $request)
+    {
         $status = $request->payment_status;
         $id = $request->id;
 
         $online_order = OnlineOrder::find($id)->update([
             'payment_status' => $status
+        ]);
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
+    public function terms_and_condition()
+    {
+        $data = Pages::find(2);
+        return view('frontend.page', compact('data'));
+    }
+    public function privacy_policy()
+    {
+        $data = Pages::find(3);
+        return view('frontend.page', compact('data'));
+    }
+    public function return_and_refund_policy()
+    {
+        $data = Pages::find(5);
+        return view('frontend.page', compact('data'));
+    }
+    public function disclaimer()
+    {
+        $data = Pages::find(6);
+        return view('frontend.page', compact('data'));
+    }
+    public function change_current_status_ajax(Request $request)
+    {
+        $status = $request->current_status;
+        $id = $request->id;
+
+        $upload = Product::find($id)->update([
+            'current_status' => $status
         ]);
         return response()->json([
             'status' => 'success'

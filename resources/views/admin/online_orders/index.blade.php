@@ -114,9 +114,8 @@
                                     <div class="col-md-3">
                                         <div class="">
                                             <label class="control-label">Customer Name/Phone/Email</label>
-                                            <input type="text" class="form-control"
-                                                placeholder="Customer Mobile" name="customer_search"
-                                                value="{{ request('customer_search') }}">
+                                            <input type="text" class="form-control" placeholder="Customer Mobile"
+                                                name="customer_search" value="{{ request('customer_search') }}">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -271,7 +270,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if (($data->order_status != 'Cancelled' && $data->order_status != 'Delivered' && $data->order_status != 'Store Pickuped') ||  $data->payment_status != 'Paid')
+                                                    @if ($data->order_status != 'Cancelled' && $data->payment_status != 'Paid')
                                                         <select class="form-control" name="payment_status"
                                                             id="payment_status" style="width: 120px;"
                                                             onchange="changePaymentStatus(this.value,{{ $data->id }})">
@@ -357,6 +356,7 @@
                 }
             });
         }
+
         function changePaymentStatus(payment_status, id) {
             const url = "{{ route('online_payment_update_ajax') }}";
             $.ajax({
